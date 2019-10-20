@@ -1,0 +1,124 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ChaHuo_View</title>
+    <script src="~/Scripts/jquery.min.js"></script>
+</head>
+<body>
+    <div>
+        用户:
+        <input type="text" id="txtToUser" />
+        <input type="button" value="连接" id="btnConnect" />
+        <span id="messageSpan" style="color:red;"></span>
+        <span id="mpan" ></span>
+
+        <table id="table_fp"></table>
+
+        <input type="button" value="分拣完成" id="btnOk" />
+    </div>
+    
+</body>
+</html>
+
+<script type="text/javascript">
+    //var ws;
+    //$(
+    //    function () {
+
+    //        $("#btnConnect").click(function () {
+    //            $("#messageSpan").text("正在等待拣货任务......");
+    //            ws = new WebSocket("ws://localhost:59461/api/WSChat?user=" + $("#txtToUser").val());
+    //            ws.onopen = function () {
+    //                $("#messageSpan").text("Connected!");
+    //            };
+    //            ws.onmessage = function (result) {
+    //                $("#messageSpan").append("有新的任务");
+    //                $("#mpan").html("<button type='button' id='btn_new' onclick='btn_new(" + result.data + ")'>有新的任务</button>");
+
+    //            };
+    //            ws.onerror = function (error) {
+    //                $("#messageSpan").text(error.data);
+    //            };
+    //            ws.onclose = function () {
+    //                $("#messageSpan").text("Disconnected!");
+    //            };
+    //            ws.onbeforeunload = function () {
+    //                ws.close();
+    //            };
+    //        });
+    //    }
+    //);
+
+    var websocket = null;
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        var hrefAddress = document.location.href.split("http://")[1].split("/");
+        websocket = new WebSocket("ws://localhost:59461/api/WSChat?user=" + $("#txtToUser").val());//设置成自己的请求地址
+    }
+    else {
+        alert('当前浏览器 Not support websocket')
+    }
+    //连接发生错误的回调方法
+    websocket.onerror = function () {
+        //console.log("WebSocket连接发生错误");
+        $("#messageSpan").text(error.data);
+        alert("WebSocket连接发生错误");
+    };
+    //连接成功建立的回调方法
+    websocket.onopen = function () {
+        $("#messageSpan").text("Connected!");
+        console.log("WebSocket连接成功");
+    }
+    //接收到消息的回调方法
+    websocket.onmessage = function (event) {
+        $("#messageSpan").append("有新的任务");
+        $("#mpan").html("<button type='button' id='btn_new' onclick='btn_new(" + event.data + ")'>有新的任务</button>");
+    }
+    //连接关闭的回调方法
+    websocket.onclose = function () {
+        console.log("WebSocket连接关闭");
+    }
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function () {
+        closeWebSocket();
+    }
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+
+    function btn_new(id) {
+        alert("a");
+        $.ajax({
+            url: "/Bk_Ckxx/JianHuo_Receive?id="+id
+            , contentType: 'application/json;charset=utf-8'
+            , success: function (data) {
+               // swal(data.info, "", data.status == 1 ? "success" : "error");
+                if (data.status == 1) {
+                    //$('#Arbet_DingDan_Table').bootstrapTable('refresh', { 'url': '/BK_Ckxx/DingDan_Find' });
+                    websocket.send(id+"|0|true");
+                    alert("ok");
+                }
+            }
+            , error: function (result) {
+                //swal("接收失败！", result.responseText.substring(0, 100), "error");
+                alert("error");
+            }
+        });
+    }
+
+    function btn_ok() {
+        ws.send(id + "|0|false");
+        alert("ok");
+    }
+
+</script>
+

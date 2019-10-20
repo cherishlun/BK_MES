@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <link rel="shortcut icon" href="favicon.ico"> <!-- 定义网站收藏夹图标 该图标在跟本页面在同一目录下-->
+    <link href="css/bootstrap.css?v=3.3.7" rel="stylesheet">  <!-- 引用bootstrap基本样式 -->
+    <link href="css/font-awesome.css?v=4.7.0" rel="stylesheet"> <!-- 引用font-awesome的字体图标 -->
+    <link href="css/animate.css" rel="stylesheet">               <!-- 引用animate.css的css3动画效果 -->
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">       <!-- 引用H+的UI设计模板 -->	
+
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">月</span>
+                        <h5>库存量</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">40 886,200</h1>
+                        <div class="stat-percent font-bold text-success">详情 <i class="fa fa-bolt"></i>
+                        </div>
+                        <small>件数</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-info pull-right">月</span>
+                        <h5>入库量</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">275,800</h1>
+                        <div class="stat-percent font-bold text-info">详情<i class="fa fa-level-up"></i>
+                        </div>
+                        <small>件数</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">月</span>
+                        <h5>出库量</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">106,120</h1>
+                        <div class="stat-percent font-bold text-navy">详情 <i class="fa fa-level-up"></i>
+                        </div>
+                        <small>件数</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-danger pull-right">最近一个月</span>
+                        <h5>活跃用户</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">80,600</h1>
+                        <div class="stat-percent font-bold text-danger">38% <i class="fa fa-level-down"></i>
+                        </div>
+                        <small>12月</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>出入库图表</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="echarts" id="echarts-pie-chart"></div>
+            									
+                    </div>
+                </div>
+            </div>
+			<div class="col-sm-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>安全库存</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="graph_flot.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="graph_flot.html#">选项1</a>
+                                </li>
+                                <li><a href="graph_flot.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+        
+                        <div class="echarts" id="echarts-bar-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>当前入库表格</h5>
+                            <div class="ibox-tools">
+                                <a class="collapse-link">
+                                    <i class="fa fa-chevron-up"></i>
+                                </a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                                    <i class="fa fa-wrench"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user">
+                                    <li><a href="table_data_tables.html#">选项1</a>
+                                    </li>
+                                    <li><a href="table_data_tables.html#">选项2</a>
+                                    </li>
+                                </ul>
+                                <a class="close-link">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                
+                            <table class="table table-striped table-bordered table-hover dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>渲染引擎</th>
+                                        <th>浏览器</th>
+                                        <th>平台</th>
+                                        <th>引擎版本</th>
+                                        <th>CSS等级</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+								</tbody>
+                            </table>
+                
+                        </div>
+                    </div>
+                </div>
+				<div class="col-sm-12">
+					<div class="ibox float-e-margins">
+				        <div class="ibox-title">
+				            <h5>当前出库表格</h5>
+				            <div class="ibox-tools">
+				                <a class="collapse-link">
+				                    <i class="fa fa-chevron-up"></i>
+				                </a>
+				                <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+				                    <i class="fa fa-wrench"></i>
+				                </a>
+				                <ul class="dropdown-menu dropdown-user">
+				                    <li><a href="table_data_tables.html#">选项1</a>
+				                    </li>
+				                    <li><a href="table_data_tables.html#">选项2</a>
+				                    </li>
+				                </ul>
+				                <a class="close-link">
+				                    <i class="fa fa-times"></i>
+				                </a>
+				            </div>
+				        </div>
+				        <div class="ibox-content">
+				
+				            <table class="table table-striped table-bordered table-hover dataTables-example">
+				                <thead>
+				                    <tr>
+				                        <th>渲染引擎</th>
+				                        <th>浏览器</th>
+				                        <th>平台</th>
+				                        <th>引擎版本</th>
+				                        <th>CSS等级</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+								</tbody>
+				            </table>
+				
+				        </div>
+				    </div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="col-sm-12">					
+					<div class="ibox float-e-margins">
+				        <div class="ibox-title">
+				            <h5>当前入库表格</h5>
+				            <div class="ibox-tools">
+				                <a class="collapse-link">
+				                    <i class="fa fa-chevron-up"></i>
+				                </a>
+				                <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+				                    <i class="fa fa-wrench"></i>
+				                </a>
+				                <ul class="dropdown-menu dropdown-user">
+				                    <li><a href="table_data_tables.html#">选项1</a>
+				                    </li>
+				                    <li><a href="table_data_tables.html#">选项2</a>
+				                    </li>
+				                </ul>
+				                <a class="close-link">
+				                    <i class="fa fa-times"></i>
+				                </a>
+				            </div>
+				        </div>
+				        <div class="ibox-content">
+							<table class="table underline"  >
+							    <tbody>
+							        <tr>
+							            <td><strong>最后一次盘点时间：</strong>
+							            </td>
+							            <td>&yen;1026.00</td>
+							        </tr>
+							        <tr>
+							            <td><strong>说明：</strong>
+							            </td>
+							            <td>厚度和腹黑护额花费话费返还富户俄红粉</td>
+							        </tr>
+							    </tbody>
+							</table>
+							
+				            <table class="table table-striped table-bordered table-hover dataTables-example">
+				                <thead>
+				                    <tr>
+				                        <th>渲染引擎</th>
+				                        <th>浏览器</th>
+				                        <th>平台</th>
+				                        <th>引擎版本</th>
+				                        <th>CSS等级</th>
+				                    </tr>
+				                </thead>
+				                <tbody>
+								</tbody>
+				            </table>
+				
+				        </div>
+				    </div>
+				</div>
+				
+			</div>
+		</div>
+	
+	</div>
+
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script type="text/javascript" src="js/bootstrap.js?v=3.3.7"></script> 
+    <script src="js/plugins/layer/layer.min.js"></script>
+    
+
+
+	<!-- ECharts -->
+	<script src="js/plugins/echarts/echarts-all.js"></script>
+	
+	<!-- ECharts demo data -->
+	<script src="js/demo/echarts-demo3.js"></script>
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+
+
+</body>
+
+</html>

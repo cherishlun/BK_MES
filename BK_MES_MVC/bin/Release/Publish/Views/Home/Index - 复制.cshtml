@@ -1,0 +1,652 @@
+﻿ @model db_models.YongHu
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>主页</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico"> <!-- 定义网站收藏夹图标 该图标在跟本页面在同一目录下-->
+    @Styles.Render("~/Content/H_css")
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg fixed-nav" style="overflow:hidden;">
+    <!-- 该body包含整体，overflow 属性规定当内容溢出元素框时发生的事情。该情况设置为隐藏 --><!-- fixed-sidebar为style里的属性设置了导航栏的宽度、高度以及位置，full-height-layout没定义作为一个ID（名字的作用），gray-bg为style中设置背景颜色的 -->
+    <div id="wrapper">
+        <!-- 定义了一个框包含整个界面，为左右布局，左边导航栏和右侧内容。作为名字，使其他样式有从属关系 -->
+        <!-- 左侧导航开始 -->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- 此为左侧导航栏，为的是形成左右布局navbar-default为style+bootstrap属性 navbar-static-side为style的属性-->
+            <!-- 该项为关闭按钮已隐藏 -->
+            <!-- <div class="nav-close">
+                            <i class="fa fa-times-circle"></i>
+            </div> -->
+            <div class="sidebar-collapse">
+                <!--该框包含在导航栏中，包含着整个列表， 该属性并没有被定义 -->
+                <ul class="nav" id="side-menu">
+                    <!-- nav在bootstrap定义了位置，在style中定义了样式，该id并没被使用 -->
+                    <!-- <li class="nav-header"> -->  <!-- 该列为logo+文字的框，其在style中定义了颜色和各种样式 -->
+                    <!-- <div class="dropdown profile-element"> --> <!-- dropdown为bootstrap特有属性，profile-element为style自定义的样式 -->
+                    <!-- <span><img alt="image" class="img-circle" src="img/profile_small.jpg" /></span> --> <!-- 前面加入span是为了换行排格式 -->  <!-- logo图片 img-circle在bootstrap与style都定义为圆弧形 -->
+                    <!-- 以下是dropdown-toggle是下拉菜单样式，data-toggle是js属性，而dropdown是属性值。data-toggle="dropdown"表示引用js给外层添加一个open类 -->
+                    <!-- <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                       <span class="clear">
+                       <span class="block m-t-xs"><strong class="font-bold">Beaut-zihan</strong></span>
+                        <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                        </span>
+                    </a> -->
+                    <!-- <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                         <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                         </li>
+                         <li><a class="J_menuItem" href="profile.html">个人资料</a>
+                         </li>
+                         <li><a class="J_menuItem" href="contacts.html">联系我们</a>
+                         </li>
+                         <li><a class="J_menuItem" href="mailbox.html">信箱</a>
+                         </li>
+                         <li class="divider"></li>
+                         <li><a href="login.html">安全退出</a>
+                         </li>
+                     </ul> -->
+                    <!-- </div> -->
+                    <!-- <div class="logo-element">H+
+                    </div> -->
+                    <!-- </li> -->
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">销售管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="index_v1.html" data-index="0">客户档案管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">客户信息管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">客户信用等级管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">客户信用等级审核</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">客户资金风险管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">客户特殊要求管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">客户合同管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">客户合同录入</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">客户合同价格管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">客户合同价格审核</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">客户合同审核</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">合同跟踪管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">合同发货管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">合同导入到U8系统</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v3.html">产品价格管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v4.html">产品价格审核</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">订单管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">业务员订单录入</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">销售订单输入</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">订单技术审核发送</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">其他信息管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">发货方式维护</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">承运人维护</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">销售数据分析<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">客户合同订单统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">产品销售统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">客户种类合同订单统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_avatar.html">销售数据导入U8系统</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="J_menuItem" href="layouts.html">
+                            <i class="fa fa-columns"></i>
+                            <span class="nav-label">技术质量管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="graph_echarts.html">订单审核</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_flot.html">产品代码管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_morris.html">产品标准管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_rickshaw.html">机器设备管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_peity.html">工艺路线管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_sparkline.html">模序管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_metrics.html">成品包装管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_metrics.html">质量判定标准管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">标签管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">成品标签模板管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">外包装标签管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">质保书管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">质保书模板管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">数据分析<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">质量数据分析</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa fa-bar-chart-o"></i>
+                            <span class="nav-label">生产计划管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">生产订单<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">订单接收</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">物料跟踪管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_echarts.html">生产计划制定</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_flot.html">生产原料制定</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="graph_morris.html">指令卡查看</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">数据分析<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">生产订单数据统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">生产计划率统计</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="mailbox.html">
+                            <i class="fa fa-envelope"></i>
+                            <span class="nav-label">生产实绩管理 </span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="mailbox.html">生产数据管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="mail_detail.html">指令卡查看</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="mail_compose.html">条形码打印</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">数据分析<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">机台效率统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">个人产量统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">班次统计</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">交货及时率统计</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">质检管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">检定数据管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">成品检测</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">半成品检测</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">原料检测</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="form_file_upload.html">退货检验</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="index_v2.html">数据分析<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="form_webuploader.html">合格率统计</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">仓储管理</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="/Bk_Ckxx/Ck_Mcgl">仓库信息管理</a>
+                            </li>
+
+                            <li>
+                                <a class="J_menuItem" href="/Bk_Ckxx/Ck_KWMcgl">仓库配置管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="profile.html">条形码打印</a>
+                            </li>
+                            <li>
+                                <a href="#">成品库管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="projects.html">入库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="/BK_Ckxx/DingDan_View">订单管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="/BK_Ckxx/PeiHuo_View">配货管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="/Bk_Ckxx/ChuKu_View">出库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="/Bk_Ckxx/ZhuangChe_View?id=1011">盘库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">库位图</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">安全库存管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">发货管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">半成品库管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="projects.html">入库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">出库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">盘库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">库位图</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">原料库管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="projects.html">入库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">出库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">盘库管理</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">库位图</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">安全库存管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">退货管理<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="projects.html">入库管理</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">数据分析<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a class="J_menuItem" href="projects.html">入库统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">出库统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">发货统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">库存统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">呆库统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">退货统计分析</a>
+                                    </li>
+                                    <li>
+                                        <a class="J_menuItem" href="project_detail.html">金属物料平衡分析报告</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">管理功能</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a class="J_menuItem" href="typography.html">用户管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="buttons.html">授权管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="tabs_panels.html">日志管理</a>
+                            </li>
+                            <li>
+                                <a class="J_menuItem" href="notifications.html">通讯管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <!-- 这个是右侧整体布局，包含一个头部标题，一个中部标题栏，一个内容块还有一个页脚。 该布局分左右page-wrapper是style里的属性显示位置以及内容显示的位置，dashbard-1并没有定义 -->
+            <!-- 头部标题开始 -->
+            <div class="row border-bottom">
+                <!-- 该框为头部标题，包含一个导航栏。row是bootstrap中的属性,border-bottom在style中定义了 -->
+                <nav class="navbar  navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+                    <!--该导航栏分两部分，第一部分为伸缩图标+查找框，另一部门为列表， navbar在bootstrap和style中都有定义,navbar-static-top在bootstrap和style中都有定义 -->
+                    <div class="navbar-header">
+                        <!-- 导航栏的图标，包含一个伸缩图标的链接，还有一个查找框 -->
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                            <i class="fa fa-bars"></i>
+                        </a>
+                        <!-- <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                <div class="form-group">
+                        <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search" id="top-search">
+                </div>
+        </form> -->
+                        <h6 class="font-name">@Model.yhms @Model.yhxm</h6>    
+                    </div>
+
+
+                   
+
+                    <ul class="nav navbar-top-links navbar-right">
+                        <!-- 该列表包含4个下拉菜单-->
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li>
+                                    <a class="J_menuItem" href="form_avatar.html">修改密码</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="profile.html">个人资料</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/Login/Out">安全退出</a>
+                                </li>
+                            </ul>
+                            <!-- <ul class="dropdown-menu dropdown-messages">
+                <li class="m-t-xs">
+                        <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/a7.jpg">
+                                </a>
+                                <div class="media-body">
+                                        <small class="pull-right">46小时前</small>
+                                        <strong>ttt</strong> 3
+                                        <br>
+                                        <small class="text-muted">3天前 2014.11.8</small>
+                                </div>
+                        </div>
+                </li>
+                <li class="divider"></li>
+                <li>
+                        <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                        <img alt="image" class="img-circle" src="img/a4.jpg">
+                                </a>
+                                <div class="media-body ">
+                                        <small class="pull-right text-navy">25小时前</small>
+                                        <strong>ttt</strong> 2
+                                        <br>
+                                        <small class="text-muted">昨天</small>
+                                </div>
+                        </div>
+                </li>
+                <li class="divider"></li>
+                <li>
+                        <div class="text-center link-block">
+                                <a class="J_menuItem" href="mailbox.html">
+                                        <i class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
+                                </a>
+                        </div>
+                </li>
+        </ul> -->
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="mailbox.html">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> 您有16条未读消息
+                                            <span class="pull-right text-muted small">4分钟前</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <div>
+                                            <i class="fa fa-qq fa-fw"></i> 3条新回复
+                                            <span class="pull-right text-muted small">12分钟钱</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a class="J_menuItem" href="notifications.html">
+                                            <strong>查看所有 </strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- <li class="hidden-xs"  >
+            <a href="index_v1.html" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> 购买</a>
+    </li> -->
+                        <!-- <li class="dropdown hidden-xs">
+            <a class="right-sidebar-toggle" aria-expanded="false">
+                    <i class="fa fa-tasks"></i> 主题
+            </a>
+    </li> -->
+                    </ul>
+                </nav>
+            </div>
+            <!-- 头部标题结束 -->
+            <div class="row content-tabs">
+                <!-- 该框为中部标题栏，包含2个按钮，以及中间显示导航栏，关闭操作按钮块，退出按钮。 -->
+                <!-- 该按钮为<<按钮 -->
+                <button class="roll-nav roll-left J_tabLeft">
+                    <i class="fa fa-backward"></i>
+                </button>
+                <!-- 中间显示导航栏 -->
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    </div>
+                </nav>
+                <!-- 该按钮为>>按钮 -->
+                <button class="roll-nav roll-right J_tabRight">
+                    <i class="fa fa-forward"></i>
+                </button>
+                <!-- 这一块为关闭操作按钮 -->
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">
+                        关闭操作<span class="caret"></span>
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive">
+                            <a>定位当前选项卡</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="J_tabCloseAll">
+                            <a>关闭全部选项卡</a>
+                        </li>
+                        <li class="J_tabCloseOther">
+                            <a>关闭其他选项卡</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 这一块为退出按钮 -->
+                <a href="/Login/Out" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+            <div class="row J_mainContent" id="content-main">
+                <!-- 该框为中间内容块，包含一个框架 -->
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/Home/Main" frameborder="0" seamless></iframe>
+            </div>
+            <div class="footer">
+                <!-- 该框为页脚，包含版本信息等 -->
+                <div class="pull-right">
+                    &copy; 2018-2019 <a href="#" target="_blank">技术支持</a>
+                </div>
+            </div>
+        </div>
+        <!--右侧部分结束-->
+    </div>
+
+
+    <!-- 全局js -->
+    @Scripts.Render("~/bundles/H_js")
+    <!-- 自定义js -->
+    <script src="/Scripts/hplus.js?v=4.1.0"></script>
+    <script type="text/javascript" src="/Scripts/contabs.js"></script>
+    <!-- 第三方插件 -->
+    <script src="/Scripts/plugins/pace/pace.min.js"></script>
+</body>
+</html>

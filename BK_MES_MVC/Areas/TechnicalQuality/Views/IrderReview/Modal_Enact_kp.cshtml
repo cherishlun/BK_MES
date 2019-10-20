@@ -1,0 +1,115 @@
+﻿@model BK_MES_MVC.Areas.TechnicalQuality.Models.mx
+@{
+    ViewBag.Title = "Modal_Enact_kp";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3></h3>
+</div>
+
+<form name="appform" id="appform" onsubmit="return false;">
+    <div class="modal-body" id="form_body">
+        <div class="form-group" style="display:none">
+            <input type="text" class="form-control" name="b" id="b" value="@Model.mlbh"/>
+        </div>
+        <div class="form-group">
+            <label>拉拔设备</label>
+            @Html.DropDownListFor(m => m.lbsb, (List<SelectListItem>)ViewBag.machine, "请选择拉拔设备", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5" })
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label>进线直径</label>
+                    <input type="text" class="form-control" name="jxzj" id="jxzj" value="@Model.jxzj" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" placeholder="请输入数字" />
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label>出线直径</label>
+                    <input type="text" class="form-control" name="cxzj" id="cxzj" value="@Model.cxzj" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" placeholder="请输入数字" />
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div style="margin-top:1em;margin-left:4em">
+                    <a class="glyphicon glyphicon-arrow-right" style="font-size:40px" id="add_ml"></a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>模链</label>
+            <input type="text" class="form-control" name="a" id="a" readonly="readonly" />
+        </div>
+    </div>
+</form>
+<script>
+</script>
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    //全局变量
+    var a, b, v, msg, val;
+    a = ""; b = ""; v = ""; msg = ""; val = "";
+   var col_lb =@ViewBag.kp_col-1;
+
+    $("#btn_save").click(function () {
+
+        msg = $('#lbsb').find("option:selected").text();
+        val = $('#lbsb').find("option:selected").val();
+    
+        if (a == "" || b == "" || msg == "" || val == "" || msg == "请选择拉拔设备") {
+            alert("请选择设备与模链");
+        } else {
+            console.info(col_lb);
+            $('#t_body').find('tr').eq(col_lb).find('dd').eq(0).text(msg);
+            $('#t_body').find('tr').eq(col_lb).find('dd').eq(0).val(val);
+            $('#t_body').find('tr').eq(col_lb).find('dd').eq(1).text(a);
+            $('#t_body').find('tr').eq(col_lb).find('dd').eq(1).val(b);
+            ModalHide();
+        }
+    });
+
+    //拉拔设备选择
+    $('#lbsb').change(function () {
+
+        $('#jxzj').val("");
+        $('#cxzj').val("");
+        $('#a').val("");
+        a = "";
+        b = "";
+    });
+
+    //模链选择
+    $('#add_ml').click(function () {
+
+        v = $('#lbsb').find("option:selected").val();
+        var jxzj = $('#jxzj').val();
+        var cxzj = $('#cxzj').val();
+
+        $.getJSON('/IrderReview/select_ml', { sbbh: v, jxzj: jxzj, cxzj: cxzj }, function (data) {
+
+            //swal(data.Result == true ? "success" : "error");
+
+            if (data.Result == true) {
+                a = data.Ml;
+                b = data.Mlbh;
+                $('#a').val(data.Ml);
+                $('#b').val(data.Mlbh);
+            }
+        })
+    });
+
+    $('#lbsb').selectpicker({});
+</script>

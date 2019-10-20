@@ -1,0 +1,961 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+此文件由 Web 项目的发布/打包过程使用。可以通过编辑此 MSBuild 文件
+自定义此过程的行为。为了解与此相关的更多内容，请访问 https://go.microsoft.com/fwlink/?LinkID=208121。 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>bin\Release\Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="ApplicationInsights.config">
+      <publishTime>12/06/2018 10:45:17</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/APP.cshtml">
+      <publishTime>04/09/2019 14:42:28</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/CP_ck_dd.cshtml">
+      <publishTime>04/04/2019 15:39:54</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/CP_ck_kg.cshtml">
+      <publishTime>03/29/2019 10:25:44</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/CP_kg_show.cshtml">
+      <publishTime>04/01/2019 14:53:50</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/CP_pk_kg.cshtml">
+      <publishTime>04/04/2019 10:15:56</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/CP_rk_kg.cshtml">
+      <publishTime>04/08/2019 09:20:34</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/APP_BK_Ckxx/Index.cshtml">
+      <publishTime>04/12/2019 14:21:16</publishTime>
+    </File>
+    <File Include="Areas/APP/Views/web.config">
+      <publishTime>03/14/2019 14:32:26</publishTime>
+    </File>
+    <File Include="Areas/pad/Views/Default/Index.cshtml">
+      <publishTime>03/01/2019 16:19:59</publishTime>
+    </File>
+    <File Include="Areas/pad/Views/web.config">
+      <publishTime>03/01/2019 15:42:06</publishTime>
+    </File>
+    <File Include="Areas/Scripts/Dropbox.js">
+      <publishTime>04/09/2019 21:46:11</publishTime>
+    </File>
+    <File Include="Areas/Scripts/modal.js">
+      <publishTime>03/28/2019 12:16:01</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>09/10/2013 16:29:20</publishTime>
+    </File>
+    <File Include="bin/ApplicationInsights.config">
+      <publishTime>12/06/2018 10:45:17</publishTime>
+    </File>
+    <File Include="bin/BK_MES_MVC.dll">
+      <publishTime>04/15/2019 15:05:33</publishTime>
+    </File>
+    <File Include="bin/BK_MES_MVC.pdb">
+      <publishTime>04/15/2019 15:05:33</publishTime>
+    </File>
+    <File Include="bin/db_mapping.dll">
+      <publishTime>04/15/2019 13:40:05</publishTime>
+    </File>
+    <File Include="bin/db_mapping.pdb">
+      <publishTime>04/15/2019 13:40:05</publishTime>
+    </File>
+    <File Include="bin/db_models.dll">
+      <publishTime>04/15/2019 15:05:33</publishTime>
+    </File>
+    <File Include="bin/db_models.pdb">
+      <publishTime>04/15/2019 15:05:33</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/23/2017 13:15:18</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>10/23/2017 13:15:20</publishTime>
+    </File>
+    <File Include="bin/EnvDTE.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
+      <publishTime>06/27/2017 12:59:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.DependencyCollector.dll">
+      <publishTime>02/22/2018 16:25:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.PerfCounterCollector.dll">
+      <publishTime>02/22/2018 16:36:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.ServerTelemetryChannel.dll">
+      <publishTime>02/22/2018 14:39:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.Web.dll">
+      <publishTime>02/22/2018 16:35:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AI.WindowsServer.dll">
+      <publishTime>02/22/2018 16:36:42</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ApplicationInsights.dll">
+      <publishTime>02/22/2018 14:36:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.TelemetryCorrelation.dll">
+      <publishTime>06/28/2017 15:05:26</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/Microsoft.MSXML.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.Common.dll">
+      <publishTime>09/17/2018 17:37:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.DataVisualization.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.Design.dll">
+      <publishTime>09/17/2018 17:37:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.ProcessingObjectModel.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WebDesign.dll">
+      <publishTime>09/17/2018 17:37:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WebForms.dll">
+      <publishTime>09/17/2018 17:37:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ReportViewer.WinForms.dll">
+      <publishTime>09/17/2018 17:37:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.SqlServer.Types.dll">
+      <publishTime>12/10/2016 15:26:34</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.OLE.Interop.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.Shell.Interop.8.0.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.Shell.Interop.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.TextManager.Interop.8.0.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.VisualStudio.TextManager.Interop.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>07/25/2012 11:48:56</publishTime>
+    </File>
+    <File Include="bin/MyClass.dll">
+      <publishTime>12/26/2018 09:24:57</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>02/18/2018 09:44:54</publishTime>
+    </File>
+    <File Include="bin/pt/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/pt/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/pt/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/pt/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/pt/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/pt/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>05/24/2018 13:38:22</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Managed.Core.targets">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Console.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Pipes.AccessControl.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Pipes.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.AccessControl.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Claims.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Principal.Windows.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.ValueTuple.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>05/24/2018 13:38:24</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/SD.Data.dll">
+      <publishTime>04/13/2019 23:18:10</publishTime>
+    </File>
+    <File Include="bin/SD.Data.pdb">
+      <publishTime>04/13/2019 23:18:10</publishTime>
+    </File>
+    <File Include="bin/SqlServerTypes/x64/msvcr120.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="bin/SqlServerTypes/x64/SqlServerSpatial140.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="bin/SqlServerTypes/x86/msvcr120.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="bin/SqlServerTypes/x86/SqlServerSpatial140.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="bin/stdole.dll">
+      <publishTime>11/02/2018 19:05:06</publishTime>
+    </File>
+    <File Include="bin/System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>07/19/2017 10:01:30</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>02/01/2018 12:17:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>02/01/2018 12:17:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>02/01/2018 12:19:26</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>02/01/2018 12:16:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/11/2014 15:26:04</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/01/2018 12:16:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>02/01/2018 12:20:56</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>01/23/2014 13:57:34</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.Common.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.DataVisualization.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.Design.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.WebDesign.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.WebForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/Microsoft.ReportViewer.WinForms.resources.dll">
+      <publishTime>09/17/2018 17:37:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
+      <publishTime>02/01/2018 12:17:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>02/01/2018 12:21:00</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.resources.dll">
+      <publishTime>02/01/2018 12:17:44</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Http.WebHost.resources.dll">
+      <publishTime>02/01/2018 12:19:30</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>02/01/2018 12:16:38</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Optimization.resources.dll">
+      <publishTime>02/11/2014 15:28:40</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>02/01/2018 12:17:00</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Deployment.resources.dll">
+      <publishTime>02/01/2018 12:21:00</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.Razor.resources.dll">
+      <publishTime>02/01/2018 12:21:00</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.WebPages.resources.dll">
+      <publishTime>02/01/2018 12:21:00</publishTime>
+    </File>
+    <File Include="bin/zxing.dll">
+      <publishTime>04/14/2018 18:39:12</publishTime>
+    </File>
+    <File Include="bin/zxing.pdb">
+      <publishTime>04/14/2018 18:39:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>12/05/2018 10:54:32</publishTime>
+    </File>
+    <File Include="Content/bootstrapValidator.css">
+      <publishTime>12/26/2018 14:42:42</publishTime>
+    </File>
+    <File Include="Data_xsd/CangKu_Label.xsc">
+      <publishTime>04/08/2019 16:10:30</publishTime>
+    </File>
+    <File Include="Data_xsd/CangKu_Label.xss">
+      <publishTime>04/08/2019 16:10:30</publishTime>
+    </File>
+    <File Include="Data_xsd/RuKu_Hz.xsc">
+      <publishTime>04/14/2019 12:14:54</publishTime>
+    </File>
+    <File Include="Data_xsd/RuKu_Hz.xss">
+      <publishTime>04/14/2019 12:14:54</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>07/25/2016 23:51:55</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>07/25/2016 23:51:55</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>07/25/2016 23:51:55</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>07/25/2016 23:51:55</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>07/25/2016 23:51:55</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="img/img/bg-h.jpg">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="img/img/bg-s.jpg">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="img/img/cpck.png">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="img/img/cppk.png">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="img/img/cprk.png">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="img/img/cpyw.png">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="img/img/p_big1.jpg">
+      <publishTime>03/26/2019 11:42:48</publishTime>
+    </File>
+    <File Include="Report/Img/Right.jpg">
+      <publishTime>04/08/2019 16:23:07</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/AnQuanKuCun_Data_View.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/AnQuanKuCun_Input.js">
+      <publishTime>03/13/2019 20:59:29</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/AnQuanKuCun_View.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/CangKu_Print.js">
+      <publishTime>03/06/2019 21:54:10</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/CangKu_Print_Bak.js">
+      <publishTime>04/02/2019 22:01:23</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/CangKu_Print_View.js">
+      <publishTime>04/03/2019 22:15:50</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/Chuku_FP.js">
+      <publishTime>02/21/2019 09:41:06</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/ChuKu_Log_View.js">
+      <publishTime>04/01/2019 15:08:06</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/ChuKu_Report.js">
+      <publishTime>04/14/2019 17:00:29</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/ChuKu_Select.js">
+      <publishTime>02/27/2019 10:30:23</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/ChuKu_View.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/Ckxx_Input.js">
+      <publishTime>03/13/2019 20:59:50</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/Ckxx_View.js">
+      <publishTime>04/01/2019 14:33:01</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/DingDan_Select.js">
+      <publishTime>04/03/2019 22:32:05</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/FaHuo_Input_Ch.js">
+      <publishTime>03/04/2019 17:05:17</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/FaHuo_Select.js">
+      <publishTime>04/03/2019 22:38:40</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/FaHuo_View.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/FaHuo_View2.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/FaHuo_View2_Mx.js">
+      <publishTime>03/19/2019 22:00:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/Index_echarts.js">
+      <publishTime>04/12/2019 15:56:05</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/KuCun_Report.js">
+      <publishTime>04/14/2019 17:16:59</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/KuCun_View.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/KuWeiTu_detailed.js">
+      <publishTime>04/12/2019 15:03:00</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/KuWeiTu_echarts.js">
+      <publishTime>04/12/2019 15:54:24</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/KuWeiTu_find_detailed.js">
+      <publishTime>04/12/2019 15:02:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/PanKu_View.js">
+      <publishTime>03/02/2019 10:25:39</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/PeiHuo_Select.js">
+      <publishTime>02/27/2019 09:37:09</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/PeiHuo_View.js">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/RuKu_Log_View.js">
+      <publishTime>04/01/2019 15:09:35</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/RuKu_Report.js">
+      <publishTime>04/14/2019 15:50:08</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/Temp7.js">
+      <publishTime>04/12/2019 11:41:40</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/Temp77.js">
+      <publishTime>04/12/2019 11:53:11</publishTime>
+    </File>
+    <File Include="Scripts/Bk_Ckxx/ZhuangChe_View.js">
+      <publishTime>02/21/2019 09:15:32</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>12/26/2018 22:36:36</publishTime>
+    </File>
+    <File Include="Scripts/jquery.min.js">
+      <publishTime>12/04/2015 18:43:52</publishTime>
+    </File>
+    <File Include="Scripts/Public/MyHelper.js">
+      <publishTime>04/13/2019 21:43:17</publishTime>
+    </File>
+    <File Include="Scripts/Public/MyTables.js">
+      <publishTime>04/14/2019 10:45:51</publishTime>
+    </File>
+    <File Include="SqlServerTypes/readme.htm">
+      <publishTime>04/14/2019 16:48:33</publishTime>
+    </File>
+    <File Include="SqlServerTypes/x64/msvcr120.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="SqlServerTypes/x64/SqlServerSpatial140.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="SqlServerTypes/x86/msvcr120.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="SqlServerTypes/x86/SqlServerSpatial140.dll">
+      <publishTime>04/14/2019 16:48:36</publishTime>
+    </File>
+    <File Include="Views/BK_ChaChe/ChaHuo_View.cshtml">
+      <publishTime>02/20/2019 08:14:57</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/AnQuanKuCun_Data_View.cshtml">
+      <publishTime>03/08/2019 11:35:50</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/AnQuanKuCun_Input.cshtml">
+      <publishTime>02/27/2019 14:49:50</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/AnQuanKuCun_View.cshtml">
+      <publishTime>02/27/2019 14:47:12</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/CangKu_Print.cshtml">
+      <publishTime>03/06/2019 16:30:13</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/CangKu_Print_View.cshtml">
+      <publishTime>04/03/2019 22:24:28</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/ChuKu_Log_View.cshtml">
+      <publishTime>04/01/2019 14:53:00</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/ChuKu_Report.cshtml">
+      <publishTime>04/14/2019 17:01:17</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/ChuKu_View.cshtml">
+      <publishTime>03/02/2019 10:24:04</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ckmc_Data.cshtml">
+      <publishTime>02/25/2019 10:26:18</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ckxx_Data_Input_Import.cshtml">
+      <publishTime>04/01/2019 14:51:12</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ckxx_Input.cshtml">
+      <publishTime>03/13/2019 21:11:47</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ckxx_View.cshtml">
+      <publishTime>04/01/2019 14:44:58</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ck_Kwgl.cshtml">
+      <publishTime>01/06/2019 14:34:06</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ck_KWMcgl.cshtml">
+      <publishTime>02/25/2019 17:04:44</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ck_KwMc_GetData_ph_wz.cshtml">
+      <publishTime>03/01/2019 09:48:35</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Ck_Mcgl.cshtml">
+      <publishTime>03/01/2019 14:04:33</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Data_Ph_dx.cshtml">
+      <publishTime>02/25/2019 11:31:38</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Data_Ph_wz.cshtml">
+      <publishTime>02/25/2019 11:28:12</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Data_PMC.cshtml">
+      <publishTime>02/25/2019 17:00:37</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/DingDan_Input_Import.cshtml">
+      <publishTime>04/01/2019 14:51:52</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/DingDan_Input_M.cshtml">
+      <publishTime>03/19/2019 09:17:25</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/DingDan_Input_T.cshtml">
+      <publishTime>03/19/2019 08:54:28</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/DingDan_Select.cshtml">
+      <publishTime>02/14/2019 17:28:24</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/DingDan_View.cshtml">
+      <publishTime>03/28/2019 13:38:58</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/FaHuo_Input_Ch.cshtml">
+      <publishTime>03/04/2019 11:25:12</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/FaHuo_Input_Ch2.cshtml">
+      <publishTime>03/19/2019 15:58:17</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/FaHuo_View.cshtml">
+      <publishTime>03/04/2019 10:48:55</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/FaHuo_View2.cshtml">
+      <publishTime>03/19/2019 21:43:49</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Index.cshtml">
+      <publishTime>04/14/2019 11:45:52</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuCun_PanKu.cshtml">
+      <publishTime>03/28/2019 13:38:57</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuCun_Report.cshtml">
+      <publishTime>04/14/2019 17:13:33</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuCun_View.cshtml">
+      <publishTime>03/01/2019 15:32:20</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuWeiTu_Details_Find_View.cshtml">
+      <publishTime>04/11/2019 21:39:09</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuWeiTu_Details_View.cshtml">
+      <publishTime>04/09/2019 22:04:49</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuWeiTu_Line_Details_Find_View.cshtml">
+      <publishTime>04/11/2019 22:19:53</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuWeiTu_Line_Details_View.cshtml">
+      <publishTime>04/09/2019 22:09:12</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/KuWeiTu_View.cshtml">
+      <publishTime>04/09/2019 22:44:38</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/PanKu_View.cshtml">
+      <publishTime>02/28/2019 16:23:38</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/PeiHuo_Select.cshtml">
+      <publishTime>03/19/2019 10:20:26</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/PeiHuo_View.cshtml">
+      <publishTime>04/03/2019 22:36:50</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/PeiHuo_View_1.cshtml">
+      <publishTime>01/29/2019 17:31:28</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/RuKu_Log_View.cshtml">
+      <publishTime>04/01/2019 15:08:43</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/RuKu_Report.cshtml">
+      <publishTime>04/14/2019 15:16:28</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/sssss.cshtml">
+      <publishTime>12/26/2018 22:09:00</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Temp.cshtml">
+      <publishTime>01/23/2019 14:10:32</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Temp2.cshtml">
+      <publishTime>02/13/2019 09:34:20</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Temp4.cshtml">
+      <publishTime>02/19/2019 15:07:15</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Temp5.cshtml">
+      <publishTime>02/19/2019 15:46:34</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/Temp7.cshtml">
+      <publishTime>04/12/2019 11:33:50</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/xx.cshtml">
+      <publishTime>03/06/2019 08:58:24</publishTime>
+    </File>
+    <File Include="Views/BK_Ckxx/ZhuangChe_View.cshtml">
+      <publishTime>02/20/2019 17:29:26</publishTime>
+    </File>
+    <File Include="Views/BK_Khxx/Index.cshtml">
+      <publishTime>12/06/2018 11:14:40</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="Views/Home/Index - 复制.cshtml">
+      <publishTime>02/22/2019 14:57:10</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>04/14/2019 17:19:52</publishTime>
+    </File>
+    <File Include="Views/Home/Main.cshtml">
+      <publishTime>12/12/2018 15:23:58</publishTime>
+    </File>
+    <File Include="Views/Login/Index.cshtml">
+      <publishTime>02/21/2019 16:01:14</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>02/22/2019 11:23:10</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout_2018.cshtml">
+      <publishTime>01/30/2019 11:32:12</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>12/06/2018 10:45:03</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/15/2019 15:05:34</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

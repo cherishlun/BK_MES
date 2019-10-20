@@ -1,0 +1,38 @@
+﻿@model db_models.cpxxb_4
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<script src="~/Scripts/Bk_Ckxx/Ckxx_Input.js"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>成品信息维护</h3>
+</div>
+
+<form action="/Bk_Ckxx/Ckxx_Save" method="post" name="appform" id="appform">
+    <div class="modal-body">
+
+        <div class="form-group">
+            <label>数据编号</label>
+            <input type="text" class="form-control" name="sjbh" id="sjbh" value="@Model.sjbh" readonly="readonly" />
+        </div>
+
+        <div class="form-group">
+            <label>重量(Kg)</label>
+            <input type="text" class="form-control" name="zl" id="zl" value="@Model.zl" />
+        </div>
+
+        <input type="text" class="form-control" name="zdbh" value="@Model.zdbh" style="visibility: hidden" />
+
+    </div>
+
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>

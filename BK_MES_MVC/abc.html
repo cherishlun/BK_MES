@@ -1,0 +1,416 @@
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>主页</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico"> <!-- 定义网站收藏夹图标 该图标在跟本页面在同一目录下-->
+    <!-- 全局js -->
+    <script src="/Scripts/jquery.min.js"></script>
+<script src="/Scripts/bootstrap.js"></script>
+<script src="/Scripts/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/Scripts/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/Scripts/plugins/layer/layer.min.js"></script><link rel="stylesheet" href="http://localhost:61171/Scripts/plugins/layer/skin/layer.css" id="layui_layer_skinlayercss" style="">
+
+    <!-- 自定义js -->
+    <script src="/Scripts/hplus.js?v=4.1.0"></script>
+    <script type="text/javascript" src="/Scripts/contabs.js"></script>
+    <!-- 第三方插件 -->
+    <script src="/Scripts/plugins/pace/pace.min.js"></script>
+
+    <link href="/Content/bootstrap.css" rel="stylesheet">
+<link href="/Content/font-awesome.css" rel="stylesheet">
+<link href="/Content/animate.css" rel="stylesheet">
+<link href="/Content/style.css" rel="stylesheet">
+
+    
+    <script src="/Scripts/sweetalert.min.js"></script>
+<script src="/Scripts/bootstrap-table/bootstrap-table.js"></script>
+<script src="/Scripts/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+
+    <link href="/Content/sweetalert.css" rel="stylesheet">
+<link href="/Scripts/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+
+
+    <!--验证-->
+    <script src="/Scripts/bootstrapValidator.js"></script>
+<script src="/Scripts/bootstrapValidator-zh-CN.js"></script>
+
+    <link href="/Content/bootstrapValidator.css" rel="stylesheet">
+
+
+    <link href="/Content/bootstrap-select.css" rel="stylesheet">
+    <script src="/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            //1.初始化Table
+            var oTable = new TableInit();
+            oTable.Init();
+
+
+            $('#btn_add').click(function () {
+                $("#myModal").modal({
+                    remote: "/Bk_Ckxx/Data_Wh_Test",
+                    backdrop: "static"
+                });
+
+            });
+
+            $("#myModal").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+                $(this).find(".modal-content").children().remove();
+            });
+
+        });
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#ArbetTable').bootstrapTable({
+                    url: '/BK_Ckxx/GetData_Test',         //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                    search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    contentType: "application/x-www-form-urlencoded",
+                    strictSearch: true,
+                    showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "no",                     //每一行的唯一标识，一般为主键列
+                    showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: [
+                        {
+                            field: 'ckmc',
+                            title: '仓库名称',
+                            width: 400
+                        }, {
+                            field: 'cklx',
+                            title: '仓库类型',
+                            witdh: 50
+                        }, {
+                            field: 'ckwz',
+                            title: '仓库位置',
+                            width: 200
+                        }, {
+                            field: 'ckzt',
+                            title: '仓库状态',
+                            width: 50,
+                        }, {
+                            field: 'ckbz',
+                            title: '仓库备注',
+                            width: 200
+                        }, {
+                            field: 'zdbh',
+                            title: '仓库编号',
+                            visible: false
+                        },
+                        {
+                            field: 'operate',
+                            title: '操作',
+                            formatter: operateFormatter //自定义方法，添加操作按钮\
+                            , width: 100
+                        },
+                    ],
+                    rowStyle: function (row, index) {
+                        var classesArr = ['success', 'info'];
+                        var strclass = "";
+                        if (row.ckzt == "可用") {
+                            strclass = classesArr[0];
+                        } else {
+                            strclass = classesArr[1];
+                        }
+                        return { classes: strclass };
+                    },
+                });
+
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,  //页码
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+
+        function operateFormatter(value, row, index) {//赋予的参数
+            var PySheDingID = row.zdbh; //;
+            // 利用 row 获取点击这行的ID
+            return [
+                "<div class='btn-group btn-group-xs'>" +
+                "<button type='button' class='btn btn-info' onclick='btnEdit(" + PySheDingID + ")' >修改</button>" +
+                "<button type='button' class='btn btn-warning' onclick='btnDele(" + PySheDingID + ")' >删除</button>" +
+                "</div>"
+            ].join('');
+        }
+
+        //关闭弹出窗口
+        function ModalHide() {
+            $("#myModal").modal('hide');
+            tablerefesh();
+        }
+
+        function btnEdit(key) {
+
+            $("#myModal").modal({
+                remote: "/Bk_Ckxx/Data_Wh_Test?id=" + key,
+                backdrop: "static"
+            });
+        }
+
+
+
+        function btnDele(key) {
+            alert(key);
+            swal({
+                title: "删除确认"
+                , text: "是否删除这条数据？"
+                , type: "info"
+                , cancelButtonText: "取消"
+                , confirmButtonText: "删除！"
+                , showCancelButton: true
+                , closeOnConfirm: false
+                , showLoaderOnConfirm: true,
+            }, function () {
+                $.ajax({
+                    url: "/Bk_Ckxx/Data_Delete_Test?id=" + key
+                    , success: function (data) {
+                        swal(data.info, "", data.status == 1 ? "success" : "error");
+                        if (data.status == 1) {
+                            tablerefesh();
+                        }
+                    }
+                    , error: function (result) {
+                        //alert(result.responseText);
+                        swal("数据删除失败！", result.responseText.substring(0, 100), "error");
+                    }
+                });
+            });
+        }
+
+        function tablerefesh() {
+            $('#ArbetTable').bootstrapTable('refresh', { 'url': "/BK_Ckxx/GetData_Test" });
+        }
+
+    </script>
+
+</head>
+
+<body class="pace-done modal-open"><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+    <div>
+      
+        
+
+
+
+<!--表格-->
+    <div class="panel-body" style="padding:0px;">
+        
+
+        <div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bs-bars pull-left"><div id="toolbar" class="btn-group">
+            <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+        </div></div><div class="columns columns-right btn-group pull-right"><button class="btn btn-default" type="button" name="refresh" aria-label="refresh" title="刷新"><i class="glyphicon glyphicon-refresh icon-refresh"></i></button><button class="btn btn-default" type="button" name="toggle" aria-label="toggle" title="切换"><i class="glyphicon glyphicon-list-alt icon-list-alt"></i></button><div class="keep-open btn-group" title="列"><button type="button" aria-label="columns" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-th icon-th"></i> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="menuitem"><label><input type="checkbox" data-field="ckmc" value="0" checked="checked"> 仓库名称</label></li><li role="menuitem"><label><input type="checkbox" data-field="cklx" value="1" checked="checked"> 仓库类型</label></li><li role="menuitem"><label><input type="checkbox" data-field="ckwz" value="2" checked="checked"> 仓库位置</label></li><li role="menuitem"><label><input type="checkbox" data-field="ckzt" value="3" checked="checked"> 仓库状态</label></li><li role="menuitem"><label><input type="checkbox" data-field="ckbz" value="4" checked="checked"> 仓库备注</label></li><li role="menuitem"><label><input type="checkbox" data-field="zdbh" value="5"> 仓库编号</label></li><li role="menuitem"><label><input type="checkbox" data-field="operate" value="6" checked="checked"> 操作</label></li></ul></div></div><div class="pull-right search"><input class="form-control" type="text" placeholder="搜索"></div></div><div class="fixed-table-container" style="height: 488px; padding-bottom: 40px;"><div class="fixed-table-header" style="margin-right: 0px;"><table class="table table-hover table-striped" style="width: 885px;"><thead><tr><th style="width: 400px; " data-field="ckmc"><div class="th-inner ">仓库名称</div><div class="fht-cell" style="width: 321px;"></div></th><th style="" data-field="cklx"><div class="th-inner ">仓库类型</div><div class="fht-cell" style="width: 68px;"></div></th><th style="width: 200px; " data-field="ckwz"><div class="th-inner ">仓库位置</div><div class="fht-cell" style="width: 168px;"></div></th><th style="width: 50px; " data-field="ckzt"><div class="th-inner ">仓库状态</div><div class="fht-cell" style="width: 68px;"></div></th><th style="width: 200px; " data-field="ckbz"><div class="th-inner ">仓库备注</div><div class="fht-cell" style="width: 168px;"></div></th><th style="width: 100px; " data-field="operate"><div class="th-inner ">操作</div><div class="fht-cell" style="width: 88px;"></div></th></tr></thead></table></div><div class="fixed-table-body"><div class="fixed-table-loading" style="top: 41px; display: none;">正在努力地加载数据中，请稍候……</div><table id="ArbetTable" class="table table-hover table-striped" style="margin-top: -40px;"><thead><tr><th style="width: 400px; " data-field="ckmc"><div class="th-inner ">仓库名称</div><div class="fht-cell"></div></th><th style="" data-field="cklx"><div class="th-inner ">仓库类型</div><div class="fht-cell"></div></th><th style="width: 200px; " data-field="ckwz"><div class="th-inner ">仓库位置</div><div class="fht-cell"></div></th><th style="width: 50px; " data-field="ckzt"><div class="th-inner ">仓库状态</div><div class="fht-cell"></div></th><th style="width: 200px; " data-field="ckbz"><div class="th-inner ">仓库备注</div><div class="fht-cell"></div></th><th style="width: 100px; " data-field="operate"><div class="th-inner ">操作</div><div class="fht-cell"></div></th></tr></thead><tbody><tr class="success" data-index="0"> <td style="width: 400px; ">1#仓库1</td> <td style="">半成品库</td> <td style="width: 200px; ">1@@2</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">仓库备注</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(21)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(21)">删除</button></div></td> </tr><tr class="success" data-index="1"> <td style="width: 400px; ">1#仓库1</td> <td style="">半成品库</td> <td style="width: 200px; ">1@@2</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">仓库备注</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(24)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(24)">删除</button></div></td> </tr><tr class="success" data-index="2"> <td style="width: 400px; ">1#仓库1</td> <td style="">半成品库</td> <td style="width: 200px; ">1@@2</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">仓库备注</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(25)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(25)">删除</button></div></td> </tr><tr class="success" data-index="3"> <td style="width: 400px; ">1#仓库123</td> <td style="">半成品库</td> <td style="width: 200px; ">1@@2</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">仓库备注</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(27)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(27)">删除</button></div></td> </tr><tr class="success" data-index="4"> <td style="width: 400px; ">1#仓库123</td> <td style="">半成品库</td> <td style="width: 200px; ">1@@2</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">仓库备注</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(28)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(28)">删除</button></div></td> </tr><tr class="success" data-index="5"> <td style="width: 400px; ">11</td> <td style="">原料库</td> <td style="width: 200px; ">22</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">33</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(22)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(22)">删除</button></div></td> </tr><tr class="success" data-index="6"> <td style="width: 400px; ">11</td> <td style="">半成品库</td> <td style="width: 200px; ">3</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">5</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(10)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(10)">删除</button></div></td> </tr><tr class="info" data-index="7"> <td style="width: 400px; ">111</td> <td style="">半成品库</td> <td style="width: 200px; ">222</td> <td style="width: 50px; ">停用</td> <td style="width: 200px; ">333</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(4)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(4)">删除</button></div></td> </tr><tr class="success" data-index="8"> <td style="width: 400px; ">111111111</td> <td style="">原料库</td> <td style="width: 200px; ">2</td> <td style="width: 50px; ">可用</td> <td style="width: 200px; ">3</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(15)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(15)">删除</button></div></td> </tr><tr class="info" data-index="9"> <td style="width: 400px; ">111啊</td> <td style="">半成品库</td> <td style="width: 200px; ">222吧</td> <td style="width: 50px; ">停用</td> <td style="width: 200px; ">333查</td> <td style="width: 100px; "><div class="btn-group btn-group-xs"><button type="button" class="btn btn-info" onclick="btnEdit(5)">修改</button><button type="button" class="btn btn-warning" onclick="btnDele(5)">删除</button></div></td> </tr></tbody></table></div><div class="fixed-table-footer" style="display: none;"><table><tbody><tr></tr></tbody></table></div></div><div class="fixed-table-pagination" style="display: block;"><div class="pull-left pagination-detail"><span class="pagination-info">显示第 1 到第 10 条记录，总共 20 条记录</span><span class="page-list">每页显示 <span class="btn-group dropup"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="page-size">10</span> <span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li role="menuitem" class="active"><a href="#">10</a></li><li role="menuitem" class=""><a href="#">25</a></li></ul></span> 条记录</span></div><div class="pull-right pagination"><ul class="pagination"><li class="page-item page-pre"><a class="page-link" href="#">?</a></li><li class="page-item active"><a class="page-link" href="#">1</a></li><li class="page-item"><a class="page-link" href="#">2</a></li><li class="page-item page-next"><a class="page-link" href="#">?</a></li></ul></div></div></div><div class="clearfix"></div>
+
+        <!--输入-->
+        <div id="myModal" class="modal fade in" role="dialog" aria-labelledby="modal" style="display: block;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+
+<script src="/Scripts/jquery.form.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                ckmc: {
+                    message: '仓库名称不能为空',
+                    validators: {
+                        notEmpty: {
+                            message: '仓库名称不能为空'
+                        }
+                    }
+                },
+                cklx: {
+                    validators: {
+                        notEmpty: {
+                            message: '仓库类型不能为空'
+                        }
+                    }
+                },
+                ckwz: {
+                    validators: {
+                        notEmpty: {
+                            message: '仓库位置不能为空'
+                        }
+                    }
+                },
+                ckzt: {
+                    validators: {
+                        notEmpty: {
+                            message: '仓库状态不能为空'
+                        }
+                    }
+                }
+            }
+
+        });
+
+        var options = {
+            success: function (data) {
+                //debugger;
+                swal(data.info, data.mess, data.status == 1 ? "success" : "error");
+                if (data.status == 1)
+                    window.parent.ModalHide();
+            },
+            error: function (result) {
+                //debugger;
+                //alert(result.responseText);
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+        $("#abcfg").click(function () {
+            swal("abc");
+
+        });
+
+        $("#btn_save").click(function () {
+            //alert("a");
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+
+    });
+</script>
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    <h3>维护</h3>
+</div>
+
+
+<form action="/Bk_Ckxx/Data_Save_Test" method="post" name="appform" id="appform" novalidate="novalidate" class="bv-form"><button type="submit" class="bv-hidden-submit" style="display: none; width: 0px; height: 0px;"></button>
+    <div class="modal-body">
+        <div class="form-group has-feedback">
+            <label>仓库名称</label>
+            <input type="text" class="form-control" name="ckmc" data-bv-field="ckmc"><i class="form-control-feedback" data-bv-icon-for="ckmc" style="display: none;"></i>
+        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="ckmc" data-bv-result="NOT_VALIDATED" style="display: none;">仓库名称不能为空</small></div>
+        <div class="form-group has-feedback">
+            <label>仓库类型</label>
+            
+            <select class="selectpicker" data-val="true" data-val-required="cklx 字段是必需的。" id="cklx" name="cklx" data-bv-field="cklx"><option value="">请选择仓库类型</option>
+<option value="1">原料库</option>
+<option value="2">半成品库</option>
+<option value="3">成品库</option>
+</select><i class="form-control-feedback" data-bv-icon-for="cklx" style="display: none;"></i>
+        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="cklx" data-bv-result="NOT_VALIDATED" style="display: none;">仓库类型不能为空</small></div>
+        <div class="form-group has-feedback">
+            <label>仓库位置</label>
+            <input type="text" class="form-control" name="ckwz" data-bv-field="ckwz"><i class="form-control-feedback" data-bv-icon-for="ckwz" style="display: none;"></i>
+        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="ckwz" data-bv-result="NOT_VALIDATED" style="display: none;">仓库位置不能为空</small></div>
+        <div class="form-group has-feedback">
+            <label>仓库状态</label>
+            <select class="selectpicker form-control" data-val="true" data-val-required="ckzt 字段是必需的。" id="ckzt" name="ckzt" data-bv-field="ckzt"><option value="">请选择仓库状态</option>
+<option value="1">可用</option>
+<option value="2">停用</option>
+</select><i class="form-control-feedback" data-bv-icon-for="ckzt" style="display: none;"></i>
+        <small class="help-block" data-bv-validator="notEmpty" data-bv-for="ckzt" data-bv-result="NOT_VALIDATED" style="display: none;">仓库状态不能为空</small></div>
+        <div class="form-group">
+            <label>仓库备注</label>
+            <input type="text" class="form-control" name="ckbz">
+        </div>
+        <input type="text" class="form-control" name="zdbh" style="visibility: hidden">
+        <div class="form-group">
+            <select class="selectpicker" data-val="true">
+                <option value="">请选择仓库类型</option>
+                <option value="1">原料库</option>
+                <option selected="selected" value="2">半成品库</option>
+                <option value="3">成品库</option>
+            </select>
+        </div>
+
+        </div>
+
+
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+</div>
+            </div>
+        </div>
+
+
+        <div class="dropdown bootstrap-select"><select class="selectpicker" id="cklx" name="cklx" tabindex="-98">
+            <option value="">请选择仓库类型</option>
+            <option value="1">原料库</option>
+            <option selected="selected" value="2">半成品库</option>
+            <option value="3">成品库</option>
+        </select><button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" data-id="cklx" title="半成品库"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">半成品库</div></div> </div><span class="bs-caret"><span class="caret"></span></span></button><div class="dropdown-menu open" role="combobox"><div class="inner open" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner "></ul></div></div></div>
+
+
+    </div>
+
+
+
+      
+    </div>
+
+
+<div class="modal-backdrop fade in"></div></body></html>

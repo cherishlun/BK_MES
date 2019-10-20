@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>主页</title>
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <link rel="shortcut icon" href="favicon.ico"> <!-- 定义网站收藏夹图标 该图标在跟本页面在同一目录下-->
+    <!-- 全局js -->
+    @Scripts.Render("~/bundles/H_js")
+    <!-- 自定义js -->
+    <script src="/Scripts/hplus.js?v=4.1.0"></script>
+    <script type="text/javascript" src="/Scripts/contabs.js"></script>
+    <!-- 第三方插件 -->
+    <script src="/Scripts/plugins/pace/pace.min.js"></script>
+
+    @Styles.Render("~/Content/H_css")
+    @RenderSection("scripts", required: false)
+</head>
+
+<body>
+    <div>
+      
+        @RenderBody()
+
+      
+    </div>
+</body>
+</html>

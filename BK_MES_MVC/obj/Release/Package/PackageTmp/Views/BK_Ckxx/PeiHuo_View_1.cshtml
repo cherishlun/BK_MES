@@ -1,0 +1,382 @@
+﻿@{
+    ViewBag.Title = "PeiHuo_View";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+<script type="text/javascript">
+        $(function () {
+
+            //1.初始化Table
+            var oTable = new TableInit();
+            oTable.Init();
+
+            $('#btn_ph_auto').click(function () {
+                swal({
+                    title: "配货确认"
+                    , text: "是否开始自动配货？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "开始！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                   $.ajax({
+                       url: "/Bk_Ckxx/PeiHuo_Ph_Auto?iDdbh=@ViewBag.ddbh"
+                    , success: function (data) {
+                        swal(data.info, "", data.status == 1 ? "success" : "error");
+                        if (data.status == 1) {
+                            tablerefesh();
+                        }
+                    }
+                    , error: function (result) {
+                        //alert(result.responseText);
+                        swal("配货失败！", result.responseText.substring(0, 100), "error");
+                    }
+                });
+                });
+            });
+
+            $("#myModal").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+                $(this).find(".modal-content").children().remove();
+            });
+
+        });
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#ArbetTable').bootstrapTable({
+                    height: tableHeight(),              //高度调整
+                    url: '/BK_Ckxx/PeiHuo_Find?ddbh='+@ViewBag.ddbh,         //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                    search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    searchOnEnterKey: true, //ENTER键搜索 ,
+                    contentType: "application/x-www-form-urlencoded",
+                    strictSearch: true,
+                    //showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    //minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "ddzdbh",                     //每一行的唯一标识，一般为主键列
+                    //showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    //cardView: false,                    //是否显示详细视图
+                    detailView: true,                   //是否显示父子表
+                    columns: [
+                        {
+                            field: 'cpmc',
+                            title: '成品名称'
+                        },
+                        {
+                            field: 'gh',
+                            title: '钢号'
+                        },
+                        {
+                            field: 'gg',
+                            title: '规格'
+                        },
+                        {
+                            field: 'zb',
+                            title: '组别'
+                        },
+                        {
+                            field: 'bzfs',
+                            title: '包装方式'
+                        },
+                        {
+                            field: 'yjl',
+                            title: '应交量'
+                        },
+                        {
+                            field: 'bz',
+                            title: '备注'
+                        },
+                        {
+                            field: 'czrq',
+                            title: '操作日期'
+                        },
+                        {
+                            field: 'ddzdbh',
+                            title: '明细编号',
+                            visible: false
+                        },
+                    ],
+                    rowStyle: function (row, index) {
+                        var classesArr = ['success', 'info'];
+                        var strclass = "";
+                        if (row.ckzt == "可用") {
+                            strclass = classesArr[0];
+                        } else {
+                            strclass = classesArr[1];
+                        }
+                        return { classes: strclass };
+                    },
+                    onExpandRow: function (index, row, $Subdetail) {
+                        oTableInit.InitSubTable(index, row, $Subdetail);
+                    }
+                });
+
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,  //页码
+                    filter: params.filter,   //查询条件
+                    search: params.search
+                };
+                return temp;
+            };
+
+            //初始化子表格(无线循环)
+            oTableInit.InitSubTable = function (index, row, $detail) {
+                var parentid = row.ddzdbh;
+                var cur_table = $detail.html('<div id="toolbar" class="btn-group"><table id="table_123"></table><div id="toolbar" class="btn-group"><button id = "btn_ph" type = "button" class= "btn btn-default" data - toggle="modal" onclick="btn_ph(\''+parentid+'\')" ></span>开始配货</button></div>').find('table');
+                $(cur_table).bootstrapTable({
+                    url: '/BK_Ckxx/PeiHuo_Find2?ddbh=' + row.ddzdbh,
+                    method: 'get',
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    contentType: "application/json",
+                    dataType: "json",
+                    queryParams: oTableInit.queryParams2,
+                    ajaxOptions: { ckbh2: row.zdbh },
+                    clickToSelect: true,
+                    pagination: true,                   //是否显示分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    uniqueId: "zdbh",
+                    pageSize: 10,
+                    pageList: [10, 25],
+                    contentType: "application/x-www-form-urlencoded",
+                    columns: [
+                        {
+                            field: 'cpmc',
+                            title: '成品名称'
+                        },
+                        {
+                            field: 'gh',
+                            title: '钢号'
+                        },
+                        {
+                            field: 'gg',
+                            title: '规格'
+                        },
+                        {
+                            field: 'zb',
+                            title: '组别'
+                        },
+                        {
+                            field: 'scrq',
+                            title: '生产日期'
+                        },
+                        {
+                            field: 'zl',
+                            title: '重量'
+                        },
+                        {
+                            field: 'zdbh',
+                            title: '自动编号',
+                            visible: true
+                        },
+                        {
+                            field: 'operate',
+                            title: '操作',
+                            formatter: operateFormatter2 //自定义方法，添加操作按钮\
+                            , width: 200
+                        },
+                    ],
+                    onLoadSuccess: function (data) {
+                    },
+                    onLoadError: function () {
+                        alert("数据加载失败！");
+                    },
+                });
+            };
+            //得到查询的参数
+            oTableInit.queryParams2 = function (params, row) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,  //页码
+                };
+                return temp;
+            };
+
+            return oTableInit;
+        };
+
+        function tableHeight() {
+            return $(window).height() - 10;
+        }
+
+        function operateFormatter2(value, row, index) {//赋予的参数
+            var PySheDingID = row.zdbh; //;
+            // 利用 row 获取点击这行的ID
+            return [
+                "<div class='btn-group btn-group-xs'>" +
+                "<button type='button' class='btn btn-info' onclick='btnDele_m(" + PySheDingID + ")' >删除</button>" +
+                "</div>"
+            ].join('');
+        }
+
+        function btn_add_m(ddbh) {
+            $("#myModal").modal({
+                remote: "/Bk_Ckxx/DingDan_Input_M?ddbh="+ddbh,
+                backdrop: "static"
+            });
+        }
+
+
+        function btnAdd(id) {
+            alert(id);
+            $("#myModal").modal({
+                remote: "/Bk_Ckxx/Data_PMC?ph=0&ckbh=" + id,
+                backdrop: "static"
+            });
+        }
+
+        function btnEdit_t(id) {
+            $("#myModal").modal({
+                remote: "/Bk_Ckxx/DingDan_Input_T?id=" + id,
+                backdrop: "static"
+            });
+        }
+
+
+        function btnDele_t(key) {
+            alert(key);
+            swal({
+                title: "删除确认"
+                , text: "是否删除这条数据？"
+                , type: "info"
+                , cancelButtonText: "取消"
+                , confirmButtonText: "删除！"
+                , showCancelButton: true
+                , closeOnConfirm: false
+                , showLoaderOnConfirm: true,
+            }, function () {
+                $.ajax({
+                    url: "/Bk_Ckxx/DingDan_Delete_T?id=" + key
+                    , success: function (data) {
+                        swal(data.info, "", data.status == 1 ? "success" : "error");
+                        if (data.status == 1) {
+                            tablerefesh();
+                        }
+                    }
+                    , error: function (result) {
+                        //alert(result.responseText);
+                        swal("数据删除失败！", result.responseText.substring(0, 100), "error");
+                    }
+                });
+            });
+        }
+
+        function btnDele_m(key) {
+            swal({
+                title: "删除确认"
+                , text: "是否删除这条数据？"
+                , type: "info"
+                , cancelButtonText: "取消"
+                , confirmButtonText: "删除！"
+                , showCancelButton: true
+                , closeOnConfirm: false
+                , showLoaderOnConfirm: true,
+            }, function () {
+                $.ajax({
+                    url: "/Bk_Ckxx/PeiHuo_Delete?id=" + key
+                    , success: function (data) {
+                        swal(data.info, "", data.status == 1 ? "success" : "error");
+                        if (data.status == 1) {
+                            tablerefesh();
+                        }
+                    }
+                    , error: function (result) {
+                        //alert(result.responseText);
+                        swal("数据删除失败！", result.responseText.substring(0, 100), "error");
+                    }
+                });
+            });
+        }
+
+    function btn_ph(id) {
+        $("#myModal").modal({
+            remote: "/Bk_CKxx/PeiHuo_Select?ddbh=" + id,
+            backdrop: "static"
+        });
+    }
+
+
+        function btnEdit(id) {
+            alert(id);
+            $("#myModal").modal({
+                remote: "/Bk_Ckxx/Data_PMC?ph=" + id + '&ckbh=0',
+                backdrop: "static"
+            });
+        }
+
+        function btShow2(id) {
+
+            //window.location.href = "/Bk_Ckxx/Ck_KwMc_GetData_ph_wz?id" = id;
+        }
+
+
+        //关闭弹出窗口
+        function ModalHide() {
+            $("#myModal").modal('hide');
+            tablerefesh();
+        }
+
+        function tablerefesh() {
+            $('#ArbetTable').bootstrapTable('refresh', { 'url': "/BK_Ckxx/PeiHuo_Find?ddbh=@ViewBag.ddbh" });
+        }
+
+</script>
+}
+
+<!--表格-->
+<div class="panel-body" style="padding:0px;">
+
+    <div id="toolbar" class="btn-group">
+        <span id="dhrq">@ViewBag.dhrq</span><span id="khmc">@ViewBag.khmc</span>
+
+        <button id="btn_ph_auto" type="button" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>自动配货
+        </button>
+
+    </div>
+
+
+    <table id="ArbetTable"></table>
+
+    <!--输入-->
+    <div id="myModal" class="modal fade" role="dialog" aria-labelledby="modal">
+        <div class="modal-dialog" role="document" style="height:80%;width:80%">
+            <div class="modal-content">
+                请稍等，正在加载表单.....
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,113 @@
+﻿@model db_models.sxcxb
+@{
+    ViewBag.Title = "Modal_sxcx";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3></h3>
+</div>
+
+<form action="/ProcessRoute/Insert_sxcx" method="post" name="appform" id="appform" onsubmit="return false;">
+    <div class="modal-body">
+        <div class="form-group" style="display:none">
+            <input type="text" class="form-control" name="zdbh" id="zdbh" value="@Model.zdbh" />
+        </div>
+
+        <div class="form-group">
+            <label>酸洗程序号</label>
+            <input type="text" class="form-control" name="sxcxh" id="sxcxh" value="@Model.sxcxh" />
+        </div>
+
+        <div class="form-group">
+            <label>酸洗时间</label>
+            <input type="text" class="form-control" name="sxsj" id="sxsj" value="@Model.sxsj" style="text-transform:uppercase;" />
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        if ($('#zdbh').val() == 0) {
+
+            $('h3').text("酸洗程序号添加");
+        } else {
+
+            $('h3').text("酸洗程序号编辑");
+        }
+
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                sxcxh: {
+                    validators: {
+                        notEmpty: {
+                            message: '酸洗程序号不能为空'
+                        }
+                    }
+                }
+                , sxsj: {
+                    validators: {
+                        notEmpty: {
+                            message: '酸洗时间不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+        $("#btn_save").click(function () {
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+
+        var options = {
+            success: function (data) {
+                swal(data.Result == true ? "success" : "error");
+                if (data.Result == true) {
+                    ModalHide();
+                }
+            },
+            error: function (result) {
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+    });
+
+</script>

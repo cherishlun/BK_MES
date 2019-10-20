@@ -1,0 +1,170 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <style>
+        ._a {
+            padding: 1%;
+        }
+        ._b {
+            padding: 1%;
+        }
+
+        /*.mt-1 {
+            margin-top: 90px;
+        }
+
+        .bg-img {
+            background-image: url(/img/img/p_big1.jpg);
+        }*/
+
+        .pt-1 {
+            padding-top: 20px;
+        }
+    </style>
+}
+
+
+    <body class="_a">
+        <div class="container-fluid">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">江西新余金属制品有限公司</a>
+                    </div>
+                </div>
+            </nav>
+            <div class="col-xs-12 _b">
+                <div class="panel panel-default mt-1 " style="background-color:rgba(0,0,0,0.7);">
+                    <!-- <div class="panel-heading">功能模块</div> -->
+                    <div class="panel-body pt-1">
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_rk_kg?id=1&type=1" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive center-block" src="~/img/img/cprk.png" />
+                                            <div class="m-t-xs font-bold">成品入库--库位选择</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_rk_kg?id=1&type=2" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive center-block" src="~/img/img/cprk.png" />
+                                            <div class="m-t-xs font-bold">成品入库--库位扫码</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_rk_kg?id=2&type=1" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive" src="~/img/img/cpyw.png" />
+                                            <div class="m-t-xs font-bold">成品移位--库位选择</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_rk_kg?id=2&type=2" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive" src="~/img/img/cpyw.png" />
+                                            <div class="m-t-xs font-bold">成品移位--库位扫码</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_ck_kg" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive" src="~/img/img/cpck.png" />
+                                            <div class="m-t-xs font-bold">成品出库</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_pk_kg?type=1" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive" src="~/img/img/cppk.png" />
+                                            <div class="m-t-xs font-bold">成品盘库--库位选择</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <!-- col-sm-7 col-sm-9 -->
+                                <div class="contact-box">
+                                    <a href="/APP/APP_BK_Ckxx/CP_pk_kg?type=2" class="thumbnail">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-rounded m-t-xs img-responsive" src="~/img/img/cppk.png" />
+                                            <div class="m-t-xs font-bold">成品盘库--库位扫码</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+
+
+
+
+@*<div class="center-block">
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-2 _a">
+            <a href="/APP/APP_BK_Ckxx/CP_rk_kg?id=1"><img src="~/img/img/仓储管理.png" alt="成品入库" class="img-responsive img-rounded center-block"></a>
+            <h3 class="text-center">成品入库</h3>
+        </div>
+        <div class="col-xs-2 col-xs-push-3 _a">
+            <a href="/APP/APP_BK_Ckxx/CP_pk_kg"><img class="img-responsive img-rounded center-block" src="~/img/img/仓储管理.png" alt="成品盘库"></a>
+            <h3 class="text-center">成品盘库</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-2 _a">
+            <a href="/APP/APP_BK_Ckxx/CP_rk_kg?id=2"><img class="img-responsive center-block img-rounded" src="~/img/img/仓储管理.png" alt="成品移位"></a>
+            <h3 class="text-center">成品移位</h3>
+        </div>
+        <div class="col-xs-2 col-xs-push-3 _a">
+            <a href="/APP/APP_BK_Ckxx/CP_ck_kg"> <img class="img-responsive center-block img-rounded" src="~/img/img/仓储管理.png" alt="成品出库"></a>
+            <h3 class="text-center">成品出库</h3>
+        </div>
+    </div>
+</div>*@

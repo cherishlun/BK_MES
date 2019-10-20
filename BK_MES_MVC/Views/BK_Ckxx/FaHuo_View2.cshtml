@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "FaHuo_View2";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="UTF-8"></script>
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+
+    <script src="~/Scripts/Bk_Ckxx/FaHuo_View2.js?ver=417"></script>
+    <script src="~/Scripts/Bk_Ckxx/FaHuo_Select.js"></script>
+    <script src="~/Scripts/Bk_Ckxx/FaHuo_View2_Mx.js"></script>
+
+}
+
+<!--表格-->
+<div class="panel-body" style="padding:0px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive">
+                <div id="toolbar">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <button id="btn_js" type="button" class="btn btn-default" data-toggle="modal">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>接收拣货完成的订单
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <select class="selectpicker" data-style="btn-white" id="ddzt">
+                                <option value="4" selected="selected">未发车记录</option>
+                                <option value="5">已发车记录</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_kh" id="search_kh" placeholder="请输入客户名称关键字...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_ch" id="search_ch" placeholder="请输入车号">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="search_ch" id="search_dd" placeholder="请输入订单编号">
+                        </div>
+
+                        <button type="button" class="btn btn-primary queryButton" id="btn_find">查询</button>
+                    </form>
+                </div>
+                <table id="table"></table>
+            </div>
+        </div>
+    </div>
+
+    <table id="ArbetTable"></table>
+    <input type="hidden" id="id_2" />
+    <input type="hidden" id="ex_index" />
+
+    <!--输入-->
+    <div id="myModal" class="modal fade" role="dialog" aria-labelledby="modal" style="overflow:scroll">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                请稍等，正在加载表单.....
+            </div>
+        </div>
+    </div>
+
+
+    <!--订单选择-->
+    <div class="modal fade" id="myModal_DingDan" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:1000px;">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>订单选择</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div id="toolbar-dingdan-select">
+                        <form class="form-inline" id="form-digndan-select">
+                            <div class="form-group" style="width:200px;">
+                                <input type="text" class="form-control" id="search" placeholder="请输入客户名称关键字..." />
+                            </div>
+                            <div class="form-group" style="width:200px;">
+                                <input type="text" class="form-control" id="dingdan_bh" placeholder="请输入销售单编号..." />
+                            </div>
+
+
+                            <button type="button" class="btn btn-primary queryButton" id="btn_dingdan_select">查询</button>
+                        </form>
+                    </div>
+                    <table id="Arbet_DingDan_Table"></table>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" id="btn_dingdan_save">保存</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--拣货查看-->
+    <div class="modal fade" id="myModal_JianHuo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document" style="width:1000px;">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>拣货查看</h3>
+                </div>
+
+                <div class="modal-body">
+                    <table id="Arbet_JianHuo_Table"></table>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,87 @@
+﻿@model db_models.cpkwpzb
+@{
+    ViewBag.Title = "仓库库位管理";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+<!-- 整体布局，包含一个框架 -->
+<div class="row  border-bottom white-bg dashboard-header">
+    <!-- 该框架包含了8个图标-->
+    <div class="col-sm-12">
+        <!-- 标题头 -->
+        <a href="#">
+            <i class="fa fa-home"></i>
+            <span class="nav-label">库位配置</span>
+
+        </a>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 ">
+            <form role="form" class="form-horizontal m-t">
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">仓库：</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="ckbh" value="" class="form-control" placeholder="请输入文本">
+                    </div>
+                </div>
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">排号：</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="ph" class="form-control" placeholder="请输入文本">
+                    </div>
+                </div>
+
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">层数：</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="" rclass="form-control" placeholder="请输入文本">
+                    </div>
+                </div>
+                <div class="form-group draggable">
+                    <label class="col-sm-3 control-label">位数：</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="" class="form-control" placeholder="请输入文本">
+                    </div>
+                </div>
+
+                <div class="hr-line-dashed"></div>
+                <div class="form-group draggable">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <button class="btn btn-primary" type="submit">加入内容</button>
+                        <button class="btn btn-white" type="submit">取消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-sm-7">
+
+
+
+
+            <table class="table table-bordered">
+                <caption><h3 style="text-align: center;">A排货架</h3></caption>
+                <thead>
+                    <tr>
+                        <th>层数</th>
+                        @Html.Raw(ViewBag.Th)
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.Raw(ViewBag.Tr)
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function check_bet(src) {
+        src.parentNode.style.background = src.checked ? "red" : "#FFFFFF"
+    }
+</script>

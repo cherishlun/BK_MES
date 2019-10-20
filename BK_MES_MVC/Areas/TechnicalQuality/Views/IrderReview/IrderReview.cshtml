@@ -1,0 +1,348 @@
+﻿@{
+    ViewBag.Title = "IrderReview";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+
+    <style>
+
+        body {
+            padding-bottom: 50px;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0px;
+            bottom: 0px;
+            width: 120%;
+            height: 50px;
+            background-color: #FFFFFF;
+            z-index: 9999;
+        }
+    </style>
+}
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <table id="ArbetTable"></table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        <div class="row" style="margin-left:1em">
+             <form id="appform" name="appform" action="/IrderReview/ReviewPass" method="post" onsubmit="return false;">
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" id="zdbh" name="zdbh" style="display:none"/>
+                    <h3>新产品代码：</h3>
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" id="djdm" name="djdm" placeholder="等级代码" />
+                </div>
+                <div class="col-xs-1">
+                    <input type="text" class="form-control" id="cllx" name="cllx" placeholder="材料类型" />
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" id="cpgg" name="cpgg" placeholder="成品规格" />
+                </div>
+                <div class="col-xs-2">
+                    <input type="text" class="form-control" id="khmc" name="khmc" placeholder="客户名称" />
+                </div>
+            </form>
+                <div class="col-xs-2">
+                    <button class="btn btn-sm btn-primary" id="check">确定</button>
+                </div>
+            </div>
+    </div>
+
+    <!--输入-->
+    <div id="myModal" class="modal fade" role="dialog" aria-labelledby="modal" style="overflow:scroll">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                请稍等，正在加载表单.....
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+<script>
+
+    $(function () {
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //$("#myModal").on("hidden.bs.modal", function () {
+        //    $(this).removeData("bs.modal");
+        //    $(this).find(".modal-content").children().remove();
+        //});
+
+
+        $('#appform').bootstrapValidator({
+            //live: 'disabled',
+            submitButtons: '#reg-btn',
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                djdm: {
+                    validators: {
+                        notEmpty: {
+                            message: '等级代码不能为空'
+                        },
+                        //threshold: 2,
+                        //remote: {
+                        //    url: '/IrderReview/check_djdm',
+                        //    message: '该等级代码不存在，请重新输入',
+                        //    delay: 1000,
+                        //    type: 'post',
+                        //    data: function (validator) {
+                        //        return {
+                                    
+                        //        }
+                        //    }
+                        //}
+                    }
+                }, cllx: {
+                    validators: {
+                        notEmpty: {
+                            message: '材料类型不能为空'
+                        }
+                    }
+                }, cpgg: {
+                    validators: {
+                        notEmpty: {
+                            message: '成品规格不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+    });
+
+    var TableInit = function () {
+        var oTableInit = new Object();
+        //初始化Table
+        oTableInit.Init = function () {
+            $('#ArbetTable').bootstrapTable({
+                //height: tableHeight(),              //高度调整
+                url: '/IrderReview/selectWaitForReview',         //请求后台的URL（*）
+                method: 'get',                      //请求方式（*）
+                toolbar: '#toolbar',                //工具按钮用哪个容器
+                striped: true,                      //是否显示行间隔色
+                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                pagination: true,                   //是否显示分页（*）
+                sortable: false,                     //是否启用排序
+                sortOrder: "asc",                   //排序方式
+                queryParams: oTableInit.queryParams,//传递参数（*）
+                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                pageNumber: 1,                       //初始化加载第一页，默认第一页
+                pageSize: 100,                       //每页的记录行数（*）
+                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                searchOnEnterKey: true, //ENTER键搜索 ,
+                contentType: "application/x-www-form-urlencoded",
+                strictSearch: true,
+                clickToSelect: true,                //是否启用点击选中行
+                uniqueId: "zdbh",                     //每一行的唯一标识，一般为主键列
+                columns: [
+                    {
+                        field: 'khmc',
+                        title: '客户名称',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'pz',
+                        title: '品种',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'bz',
+                        title: '标准',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'gg',
+                        title: '规格',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'zb',
+                        title: '组别',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'gh',
+                        title: '钢号',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'qdyq',
+                        title: '强度要求',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'gcyq',
+                        title: '公差要求',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'bzhu',
+                        title: '备注',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        field: 'zdbh',
+                        title: '自动编号',
+                        visible: false
+                    }, {
+                        field: 'operate',
+                        title: '操作',
+                        formatter: operateFormatter, //自定义方法，添加操作按钮\
+                        align: 'center',
+                        valign: 'middle'
+                    }
+                ]
+            })
+        }
+
+        //得到查询的参数
+        oTableInit.queryParams = function (params) {
+            var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                //limit: params.limit,   //页面大小
+                //offset: params.offset,  //页码
+                //search: $("#searchText").val()
+            };
+            return temp;
+        };
+
+        return oTableInit;
+    };
+
+
+    function tableHeight() {
+        return $(window).height() - 10;
+    }
+
+    function operateFormatter(value, row, index) {//赋予的参数
+        var PySheDingID = row.zdbh; //;
+        // 利用 row 获取点击这行的ID
+        return [
+            "<div class='btn-group btn-group-xs'>" +
+            "&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-ok' style='font-size:20px' onclick='btnPass(" + PySheDingID + ")' ></a>" +
+            "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-remove' style='font-size:20px' onclick='btnRefuse(" + PySheDingID + ")' ></a>" +
+            "</div>"
+        ].join('');
+    }
+
+    //审核通过
+    function btnPass(id) {
+        swal({
+            title: "审核确认"
+            , text: "是否审核这条数据？"
+            , type: "info"
+            , cancelButtonText: "取消"
+            , confirmButtonText: "通过！"
+            , showCancelButton: true
+            , closeOnConfirm: true
+            , showLoaderOnConfirm: true,
+        }, function () {
+            console.info(id);
+            $('#zdbh').val(id);
+            console.info($('#zdbh').val());
+            ////自动配对等级代码
+            //$.ajax({
+            //    url:"/IrderReview/"
+            //})
+
+        });
+    }
+
+    //确认等级代码
+    $("#check").click(function () {
+        $("#appform").bootstrapValidator('validate');
+        var bootstrapValidator = $("#appform").data('bootstrapValidator');
+        bootstrapValidator.validate();
+        if (bootstrapValidator.isValid()) {
+            swal({
+                title: "保存确认"
+                , text: "是否保存数据？"
+                , type: "info"
+                , cancelButtonText: "取消"
+                , confirmButtonText: "保存！"
+                , showCancelButton: true
+                , closeOnConfirm: false
+                , showLoaderOnConfirm: true,
+            }, function () {
+                $("#appform").ajaxSubmit(options);
+            });
+        }
+    });
+
+    var options = {
+        success: function (data) {
+            if (data.Result == true) {
+                swal("审核成功");
+            } else {
+                swal(data.Message);
+            }
+        },
+        error: function (result) {
+            swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+        }
+    };
+
+    //审核不通过
+    function btnRefuse(id) {
+        swal({
+            title: "审核拒绝确认"
+            , text: "是否拒绝这条数据？"
+            , type: "info"
+            , cancelButtonText: "取消"
+            , confirmButtonText: "拒绝！"
+            , showCancelButton: true
+            , closeOnConfirm: false
+            , showLoaderOnConfirm: true,
+        }, function () {
+            $.ajax({
+                url: "/IrderReview/RefuseReview"
+                , type: "post"
+                , data: { zdbh: id }
+                , success: function (data) {
+                    swal(data.Result == true ? "success" : "error");
+                    if (data.Result == true) {
+                        tablerefesh();
+                    }
+                }
+                , error: function (result) {
+                    swal("审核拒绝失败！", result.responseText.substring(0, 100), "error");
+                }
+            });
+        });
+    }
+
+</script>

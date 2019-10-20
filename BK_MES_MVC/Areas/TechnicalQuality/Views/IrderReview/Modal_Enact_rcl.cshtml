@@ -1,0 +1,62 @@
+﻿@model db_models.rclb
+@{
+    ViewBag.Title = "Modal_Enact_rcl";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>热处理编辑</h3>
+</div>
+
+<form id="appform" onsubmit="return false;">
+    <div class="modal-body">
+        <div class="form-group">
+            <label>热处理设备</label>
+            @Html.DropDownListFor(m => m.zdbh, (List<SelectListItem>)ViewBag.rclb, "请选择热处理设备", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5" })
+        </div>
+    </div>
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    var msg, val;
+    msg = ""; val = "";
+    var hot =@ViewBag.hot-1;
+
+    $(function () {
+
+        $("#btn_save").click(function () {
+
+            msg = $('#zdbh').find("option:selected").text();
+            val = $('#zdbh').find("option:selected").val();
+
+            if (msg == "" || val == "") {
+                alert("请选择合适的加热炉");
+            } else {
+                //$('#rcl').text(v);
+                //temp += 1;
+                //Arr_rcl.push({ "序号": temp, "热处理设备": v });
+                $('#t_body').find('tr').eq(hot).find('dd').text(msg);
+                $('#t_body').find('tr').eq(hot).find('dd').val(val);
+
+                ModalHide();
+            }
+        });
+
+    });
+
+    $('#zdbh').selectpicker({});
+</script>

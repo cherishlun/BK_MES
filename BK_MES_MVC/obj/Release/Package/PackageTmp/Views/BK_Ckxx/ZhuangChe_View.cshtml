@@ -1,0 +1,46 @@
+﻿@model BK_MES_MVC.Models.DingDan_t
+@{
+    ViewBag.Title = "ZhuangChe_View";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+  
+    <script src="~/Scripts/Bk_Ckxx/ZhuangChe_View.js"></script>
+}
+
+
+
+<h2>@Model.khmc</h2>
+<h2>@Model.dhrq</h2>
+
+
+<div class="panel-body" style="padding:0px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive">
+                <div id="toolbar">
+                    <div class="form-group">
+                        <label>条形码</label>
+                        <input type="text" class="form-control" id="searchText" placeholder="请输入条码" autocomplete="off" onfocus="this.value=''" onkeyup="showMsg(this.value)">
+                        <textarea class="form-control" id="searchText_d" rows="10" style="min-width: 90%" placeholder="请输入条码" onfocus="this.value=''"></textarea><button type="button" class="btn btn-primary queryButton" onclick="showMsg2();">匹配</button>
+
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary queryButton" id="btn_zc" onclick="btn_zc()">完成装车扫码</button>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+
+    <table id="ArbetTable"></table>
+
+    <input type="hidden" id="hidden" value="@Model.zdbh" />
+
+
+</div>

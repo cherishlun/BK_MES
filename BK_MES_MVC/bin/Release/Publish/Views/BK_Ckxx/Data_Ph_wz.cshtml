@@ -1,0 +1,109 @@
+﻿@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                rowx: {
+                    message: '行不能为空',
+                    validators: {
+                        notEmpty: {
+                            message: '行不能为空,只加列这里可以填0'
+                        },
+                        digits: {
+                            message: '字段必须是正整数'
+                        }
+                    }
+                },
+                columny: {
+                    validators: {
+                        notEmpty: {
+                            message: '列不能为空，只加行这里可以填0'
+                        },
+                        digits: {
+                            message: '字段必须是正整数'
+                        }
+                    }
+                }
+            }
+        });
+
+        var options = {
+            success: function (data) {
+                //debugger;
+                swal(data.info, data.mess, data.status == 1 ? "success" : "error");
+                if (data.status == 1)
+                    ModalHide();
+            },
+            error: function (result) {
+                //debugger;
+                //alert(result.responseText);
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+        $("#btn_save").click(function () {
+            //alert("a");
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+    });
+</script>
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>维护</h3>
+</div>
+
+
+<form action="/Bk_Ckxx/Save_Ph_wz" method="post" name="appform" id="appform">
+    <div class="modal-body">
+        <div class="form-group">
+            <label>行</label>
+            <input type="text" class="form-control" name="rowx" value="" />
+        </div>
+
+        <div class="form-group">
+            <label>列</label>
+            <input type="text" class="form-control" name="columny" value="" />
+            <input type="text" class="form-control" name="ph" value="@ViewBag.ph" style="visibility: hidden" />
+        </div>
+
+    </div>
+
+
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>

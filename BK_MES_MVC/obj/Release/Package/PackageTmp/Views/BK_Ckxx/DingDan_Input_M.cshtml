@@ -1,0 +1,199 @@
+﻿@model db_models.dingdan_m
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#appform_m').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                cpmc: {
+                    trigger: "change", 
+                    validators: {
+                        notEmpty: {
+                            message: '产品不能为空'
+                        }
+                    }
+                }
+                , gh: {
+                    trigger: "change", 
+                    validators: {
+                        notEmpty: {
+                            message: '钢号不能为空'
+                        }
+                    }
+                }
+                , gg: {
+                    trigger: "change", 
+                    validators: {
+                        notEmpty: {
+                            message: '规格不能为空'
+                        }
+                    }
+                }
+                , zb: {
+                    trigger: "change", 
+                    validators: {
+                        notEmpty: {
+                            message: '组别不能为空'
+                        }
+                    }
+                }
+                , yjl: {
+                    validators: {
+                        notEmpty: {
+                            message: '应交量不能为空'
+                        }
+                        , number: {
+                            message: "输入数字"
+                           
+                        }
+                        ,greaterThan: {
+                            value: 1,
+                            message: '最小输入1'
+                        }
+                    }
+                }
+            }
+        });
+
+        var options = {
+            success: function (data) {
+                //debugger;
+                swal(data.info, data.mess, data.status == 1 ? "success" : "error");
+                if (data.status == 1) {
+
+                    ModalHide_M();
+                }
+            },
+            error: function (result) {
+                //debugger;
+                //alert(result.responseText);
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+
+        $("#btn_save").click(function () {
+            //alert("a");
+            $("#appform_m").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform_m").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform_m").ajaxSubmit(options);
+                });
+            }
+        });
+
+        $("#btn_select").click(function () {
+            $("#myModal_Select").modal({
+                backdrop: "static"
+            });
+        });
+
+        $('#cpbm').selectpicker({});
+    });
+</script>
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>维护  @if (@Model.zdbh == null) { <button type="button" class="btn btn-group" id="btn_select">选择订单</button>}</h3>
+</div>
+
+
+<form action="/Bk_Ckxx/DingDan_Save_M" method="post" name="appform_m" id="appform_m">
+    <div class="modal-body">
+        <div class="form-group">
+            <label>产品名称</label>
+            <input type="text" class="form-control" name="cpmc" id="cpmc" value="@Model.cpmc" />
+            @*@Html.DropDownListFor(m => m.cpbm, (List<SelectListItem>)ViewBag.form_cpmc, "请选择成品名称", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5" })*@
+        </div>
+
+        <div class="form-group">
+            <label>钢号</label>
+            <input type="text" class="form-control" name="gh" id="gh" value="@Model.gh" />
+        </div>
+
+        <div class="form-group">
+            <label>规格</label>
+            <input type="text" class="form-control" name="gg" id="gg" value="@Model.gg" />
+        </div>
+
+        <div class="form-group">
+            <label>组别</label>
+            <input type="text" class="form-control" name="zb" id="zb" value="@Model.zb" />
+        </div>
+
+        @*<div class="form-group">
+            <label>客户_编码</label>
+            <input type="text" class="form-control" name="kh_bm" id="kh_bm" value="@Model.kh_bm" />
+        </div>
+        <div class="form-group">
+            <label>客户_订单号</label>
+            <input type="text" class="form-control" name="kh_ddh" id="kh_ddh" value="@Model.kh_ddh" />
+        </div>
+        <div class="form-group">
+            <label>客户_物料编码</label>
+            <input type="text" class="form-control" name="kh_wlbm" id="kh_wlbm" value="@Model.kh_wlbm" />
+        </div>*@
+
+
+        <div class="form-group">
+            <label>应交量(Kg)</label>
+            <input type="text" class="form-control" name="yjl" id="yjl" value="@Model.yjl" />
+        </div>
+
+        <div class="form-group">
+            <label>客户代码</label>
+            <input type="text" class="form-control" name="khdm" value="@Model.khdm" />
+        </div>
+
+        <div class="form-group">
+            <label>备注1</label>
+            <input type="text" class="form-control" name="bz1" id="bz1" value="@Model.bz1" />
+        </div>
+        <div class="form-group">
+            <label>备注2</label>
+            <input type="text" class="form-control" name="bz2" id="bz2" value="@Model.bz2" />
+        </div>
+        <div class="form-group">
+            <label>备注3</label>
+            <input type="text" class="form-control" name="bz3" id="bz3" value="@Model.bz3" />
+        </div>
+
+        <input type="text" class="form-control" name="zdbh" value="@Model.zdbh" style="visibility: hidden" />
+        <input type="text" class="form-control" name="dhtbh" value="@Model.dhtbh" style="visibility: hidden" />
+    </div>
+
+
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>

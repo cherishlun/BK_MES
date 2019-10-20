@@ -1,0 +1,2 @@
+D:\VsProject\BK_MES_MVC\db_mapping\obj\Release\db_mapping.csprojAssemblyReference.cache
+D:\VsProject\BK_MES_MVC\db_mapping\obj\Release\db_mapping.csproj.CoreCompileInputs.cache

@@ -1,0 +1,9 @@
+D:\VsProject\BK_MES_MVC\db_models\bin\Release\db_models.dll
+D:\VsProject\BK_MES_MVC\db_models\bin\Release\db_models.pdb
+D:\VsProject\BK_MES_MVC\db_models\bin\Release\Newtonsoft.Json.dll
+D:\VsProject\BK_MES_MVC\db_models\obj\Release\db_models.csprojAssemblyReference.cache
+D:\VsProject\BK_MES_MVC\db_models\obj\Release\db_models.csproj.CoreCompileInputs.cache
+D:\VsProject\BK_MES_MVC\db_models\obj\Release\db_models.csproj.CopyComplete
+D:\VsProject\BK_MES_MVC\db_models\obj\Release\db_models.dll
+D:\VsProject\BK_MES_MVC\db_models\obj\Release\db_models.pdb
+D:\VsProject\BK_MES_MVC\db_models\bin\Release\Newtonsoft.Json.xml

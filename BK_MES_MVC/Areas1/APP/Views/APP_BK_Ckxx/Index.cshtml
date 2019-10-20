@@ -1,0 +1,163 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录界面</title>
+
+    <!-- 全局js -->
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
+
+    <script src="/Scripts/plugins/layer/layer.min.js"></script>
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
+    <link href="/Content/font-awesome.css" rel="stylesheet" />
+    <link href="/Content/animate.css" rel="stylesheet" />
+    <link href="/Content/style.css" rel="stylesheet" />
+
+    <!--验证-->
+    <script src="/Scripts/bootstrapValidator.js"></script>
+    <script src="/Scripts/bootstrapValidator-zh-CN.js"></script>
+    <link href="/Content/bootstrapValidator.css" rel="stylesheet" />
+
+    <script src="/Scripts/sweetalert.min.js"></script>
+    <link href="/Content/sweetalert.css" rel="stylesheet" />
+    <script src="/Scripts/jquery.form.js" type="text/javascript"></script>
+    <script src="/Scripts/md5.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        document.onkeydown = function (event) {
+            if (event.keyCode == 13) {
+                btn_sumbit();
+            }
+        }
+
+
+        $(function () {
+
+            $("#UserName")[0].focus()
+
+            $("#btn_login").click(function () {
+                btn_sumbit();
+            });
+
+            $('#LoginForm').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    UserName: {
+                        message: '用户名不能为空',
+                        validators: {
+                            notEmpty: {
+                                message: '用户名不能为空'
+                            }
+                        }
+                    },
+                    PassWord: {
+                        validators: {
+                            notEmpty: {
+                                message: '密码不能为空'
+                            }
+                        }
+                    }
+                }
+            });
+
+
+        });
+
+        function btn_sumbit() {
+            var options = {
+                success: function (data) {
+                    if (data.status == 1) {
+                        window.location.href = "/APP/APP_BK_Ckxx/app";
+                        return;
+                    }
+                    swal(data.info, data.mess, data.status == 1 ? "success" : "error");
+                },
+                error: function (result) {
+                    //debugger;
+                    swal("登录失败", "用户名或密码错误！", "error");
+                }
+            };
+
+            $("#LoginForm").bootstrapValidator('validate');
+            var bootstrapValidator = $("#LoginForm").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                $("#md5_pwd").val(md5($("#PassWord").val()));
+                $("#LoginForm").ajaxSubmit(options);
+            }
+        }
+
+    </script>
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if (window.top !== window.self) { window.top.location = window.location; }</script>   <!-- 如果当前窗口不是最上层窗口（比如是在Iframe中），那么就把自己变为最上层窗口。这可以防止别的网站把你自己的网站放在他的Iframe中，从而损害你的利益（因为会误导浏览者）。 -->
+</head>
+<body class="gray-bg">
+    <!-- 定义了背景颜色，在style里 -->
+    <!-- 该div是定义登录框的大小，位置居中，上内边距与内容之间的空隙 ，其中middle-box为style的属性，text-center为bootstrap的属性，loginscreen为style的属性，animated为style与animate的属性，fadeInDown为animate的属性-->
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <!-- class可以指定多个值,用空格隔开就可以了.多个样式定义最终会叠加在一起应用到当前元素. -->
+        <div>
+            <!-- 该框里分3层 ，分别是logo,标题与表单-->
+
+            <div>
+                <!-- 其中h1在style里定义字体大小起了作用，logo-name在style里定义了样式然而和h1重复定义字体大小，h1确起了作用，说明h1比class优先级高 -->
+                <h1 class="logo-name">MES</h1>
+            </div>
+
+            <!-- 第1层结束 -->
+
+            <h3>欢迎使用</h3>   <!-- 该h3分别在bootstrap与style中定义，其中在b中定义位置，在style中定义样子 -->
+            <!-- 第2层结束 -->
+
+            <form id="LoginForm" method="post" action="~/Login/In" onsubmit="return false">
+                <!-- 该表单里分6层 ，分别是2个文本框,2个下拉列表框，1个按钮和一段话，其中m-t在style中-->
+                <div class="form-group">
+                    <!-- 该属性在bootstrap中定义位置距离底部有空15px -->
+                    <input type="text" class="form-control" placeholder="用户名" name="UserName" id="UserName" onkeyup="if (event.keyCode == 13) $('#PassWord')[0].focus();">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" name="PassWord" id="PassWord">  <!-- form-control在style中定义样式 -->
+                    <input type="hidden" name='md5_pwd' id="md5_pwd" value='' />
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="classes" style="color:gray;">
+                        <option value="" disabled selected hidden>班次</option>
+                        <option>常早班</option>
+                        <option>早班</option>
+                        <option>中班</option>
+                        <option>晚班</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="groups" style="color:gray;">
+                        <option value="" disabled selected hidden>班组</option>
+                        <option>常早班</option>
+                        <option>甲班</option>
+                        <option>乙班</option>
+                        <option>丙班</option>
+                        <option>丁班</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary block full-width" id="btn_login">登 录</button>
+                <!-- <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="register.html">注册一个新账号</a>
+                </p> -->
+            </form>
+
+        </div>
+    </div>
+</body>
+</html>

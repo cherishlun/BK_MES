@@ -1,0 +1,223 @@
+﻿@model db_models.machine_Table
+@{
+    ViewBag.Title = "Modal_machine";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3></h3>
+</div>
+
+<form action="/MachineManage/Insert_machine" method="post" name="appform" id="appform" onsubmit="return false;">
+    <div class="modal-body">
+        <div class="form-group" style="display:none">
+            <input type="text" class="form-control" name="zdbh" id="zdbh" value="@Model.zdbh" />
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>设备名称</label>
+                    <input type="text" class="form-control" name="sbmc" id="sbmc" value="@Model.sbmc" />
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>设备编号</label>
+                    <input type="text" class="form-control" name="sbbh" id="sbbh" value="@Model.sbbh" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>卷径_卷筒</label>
+                    <input type="text" class="form-control" name="jj_jt" id="jj_jt" value="@Model.jj_jt" />
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>卷径_倒立式</label>
+                    <input type="text" class="form-control" name="jj_dls" id="jj_dls" value="@Model.jj_dls" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>矢量_卷筒</label>
+                    <input type="text" class="form-control" name="sl_jt" id="sl_jt" value="@Model.sl_jt" />
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>矢量_倒立式</label>
+                    <input type="text" class="form-control" name="sl_dls" id="sl_dls" value="@Model.sl_dls" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>收线速度_卷径</label>
+                    <input type="text" class="form-control" name="sxsd_jj" id="sxsd_jj" value="@Model.sxsd_jj" />
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>收线速度_倒立式</label>
+                    <input type="text" class="form-control" name="sxsd_dls" id="sxsd_dls" value="@Model.sxsd_dls" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>机台类别</label>
+                    <input type="text" class="form-control" name="jtlb" id="jtlb" value="@Model.jtlb"/>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>生产商</label>
+                    <input type="text" class="form-control" name="scs" id="scs" value="@Model.scs"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>安装位置</label>
+                    <input type="text" class="form-control" name="azwz" id="azwz" value="@Model.azwz"/>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>固定资产编号</label>
+                    <input type="text" class="form-control" name="gdzcbh" id="gdzcbh" value="@Model.gdzcbh"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>产品规格</label>
+                    <input type="text" class="form-control" name="cpgg" id="cpgg" value="@Model.cpgg" />
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>备注</label>
+                    <input type="text" class="form-control" name="bz" id="bz" value="@Model.bz" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        if ($('#zdbh').val() == 0) {
+            console.info($('#zdbh').val());
+            $('h3').text("机台设备添加");
+        } else {
+
+            $('h3').text("机台设备编辑");
+        }
+
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                jtlb: {
+                    validators: {
+                        notEmpty: {
+                            message: '机台类别不能为空'
+                        }
+                    }
+                }
+                , sbmc: {
+                    validators: {
+                        notEmpty: {
+                            message: '设备名称不能为空'
+                        }
+                    }
+                }
+                , sbbh: {
+                    validators: {
+                        notEmpty: {
+                            message: '设备编号不能为空'
+                        }
+                    }
+                }
+                , scs: {
+                    validators: {
+                        notEmpty: {
+                            message: '生产商不能为空'
+                        }
+                    }
+                }
+                , azwz: {
+                    validators: {
+                        notEmpty: {
+                            message: '安装位置不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+        $("#btn_save").click(function () {
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+        var options = {
+            success: function (data) {
+                swal(data.Result == true ? "success" : "error");
+                if (data.Result == true) {
+                    ModalHide();
+                }
+            },
+            error: function (result) {
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+    });
+
+</script>
+
+

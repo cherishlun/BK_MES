@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "DingDan_Input_Import";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $('#appform').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    excel_dingdan: {
+                        validators: {
+                            notEmpty: {
+                                message: '不能为空'
+                            }
+                        }
+                    }
+                }
+            });
+
+            var options = {
+                success: function (data) {
+                    swal(data.info, data.mess, data.status == 1 ? "success" : "error");
+                },
+                error: function (result) {
+                    swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+                }
+            };
+
+
+            $("#btn_im").click(function () {
+                $("#appform").bootstrapValidator('validate');
+                var bootstrapValidator = $("#appform").data('bootstrapValidator');
+                bootstrapValidator.validate();
+                if (bootstrapValidator.isValid()) {
+                    swal({
+                        title: "保存确认"
+                        , text: "是否保存数据？"
+                        , type: "info"
+                        , cancelButtonText: "取消"
+                        , confirmButtonText: "保存！"
+                        , showCancelButton: true
+                        , closeOnConfirm: false
+                        , showLoaderOnConfirm: true,
+                    }, function () {
+                        $("#appform").ajaxSubmit(options);
+                    });
+                }
+            });
+
+        })
+    </script>
+
+}
+    <div class="container-fluid">
+        <form action="/Bk_Ckxx/DingDan_Input_Import" method="post" name="appform" id="appform">
+            <div class="form-group">
+                <label for="exampleInputPassword1">请粘贴订单数据</label>
+                <textarea name="excel_dingdan" id="excel_dingdan" cols="200" rows="25"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary queryButton" id="btn_im">保存</button>
+        </form>
+        </div>

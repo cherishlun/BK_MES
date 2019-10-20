@@ -1,0 +1,138 @@
+﻿@model db_models.cpzlbzb
+@{
+    ViewBag.Title = "Modal_zlbz";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3></h3>
+</div>
+
+<form action="/LevelCode/Insert_zlbz" method="post" name="appform" id="appform" onsubmit="return false;">
+    <div class="modal-body">
+        <div class="form-group" style="display:none">
+            <input type="text" class="form-control" name="zdbh" id="zdbh" value="@Model.zdbh" />
+        </div>
+        <div class="form-group">
+            <label>参考标准</label>
+            <input type="text" class="form-control" name="ckbz" id="ckbz" value="@Model.ckbz" style="text-transform:uppercase;"/>
+        </div>
+        @*<div class="form-group">
+            <label>抗拉强度</label>
+            <input type="text" class="form-control" name="klqd" id="klqd" value="@Model.klqd" />
+        </div>
+        <div class="form-group">
+            <label>扭转</label>
+            <input type="text" class="form-control" name="nz" id="nz" value="@Model.nz" />
+        </div>
+        <div class="form-group">
+            <label>弯曲</label>
+            <input type="text" class="form-control" name="wq" id="wq" value="@Model.wq" />
+        </div>*@
+        <div class="form-group">
+            <label>文件</label>
+            <input type="file" name="file" class="form-control"/>
+        </div>
+    </div>
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        if ($('#zdbh').val() ==0) {
+
+            $('h3').text("参考标准添加");
+        } else {
+
+            $('h3').text("参考标准编辑");
+        }
+
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                ckbz: {
+                    validators: {
+                        notEmpty: {
+                            message: '参考标准不能为空'
+                        }
+                    }
+                }
+                //, klqd: {
+                //    validators: {
+                //        notEmpty: {
+                //            message: '抗拉强度不能为空'
+                //        }
+                //    }
+                //}
+                //, nz: {
+                //    validators: {
+                //        notEmpty: {
+                //            message: '扭转不能为空'
+                //        }
+                //    }
+                //}
+                //, wq: {
+                //    validators: {
+                //        notEmpty: {
+                //            message: '弯曲不能为空'
+                //        }
+                //    }
+                //}
+            }
+        });
+
+        $("#btn_save").click(function () {
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+
+        var options = {
+            success: function (data) {
+                swal(data.Result == true ? "success" : "error");
+                if (data.Result == true) {
+                    ModalHide();
+                }
+            },
+            error: function (result) {
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+    });
+</script>
+

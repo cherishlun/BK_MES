@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>配货选择</h3>
+</div>
+
+
+<div class="modal-body">
+    <div id="toolbar-select">
+        <form class="form-inline" id="form-select">
+            <div class="form-group" style="width:200px;">
+                @*@Html.DropDownList("cpbm", (List<SelectListItem>)ViewBag.from_cpmc, "请选择成品名称", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5", styles = "width:200px" })*@
+                <input type="text" class="form-control" id="st_mc" placeholder="请输入成品名称" style="width:100px;">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="st_gh" placeholder="请输入钢号" style="width:100px;">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="st_gg" placeholder="请输入规格" style="width:100px;">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="st_zb" placeholder="请输入组别" style="width:100px;">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="st_zl1" placeholder="请输入重量" style="width:100px;">
+                <input type="text" class="form-control" id="st_zl2" placeholder="请输入重量" style="width:100px;">
+            </div>
+            <button type="button" class="btn btn-primary queryButton" id="btn_find_select">查询</button>
+        </form>
+    </div>
+    <table id="Arbet_Top_Table"></table>
+    <table id="Arbet_Bottom_Table"></table>
+</div>
+
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CangKu_Label" targetNamespace="http://tempuri.org/CangKu_Label.xsd" xmlns:mstns="http://tempuri.org/CangKu_Label.xsd" xmlns="http://tempuri.org/CangKu_Label.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CangKu_Label" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="CangKu_Label" msprop:Generator_UserDSName="CangKu_Label">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="CangKu_Label" msprop:Generator_TableClassName="CangKu_LabelDataTable" msprop:Generator_TableVarName="tableCangKu_Label" msprop:Generator_TablePropName="_CangKu_Label" msprop:Generator_RowDeletingName="CangKu_LabelRowDeleting" msprop:Generator_RowChangingName="CangKu_LabelRowChanging" msprop:Generator_RowEvHandlerName="CangKu_LabelRowChangeEventHandler" msprop:Generator_RowDeletedName="CangKu_LabelRowDeleted" msprop:Generator_UserTableName="CangKu_Label" msprop:Generator_RowChangedName="CangKu_LabelRowChanged" msprop:Generator_RowEvArgName="CangKu_LabelRowChangeEvent" msprop:Generator_RowClassName="CangKu_LabelRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CkMc" msprop:Generator_ColumnVarNameInTable="columnCkMc" msprop:Generator_ColumnPropNameInRow="CkMc" msprop:Generator_ColumnPropNameInTable="CkMcColumn" msprop:Generator_UserColumnName="CkMc" type="xs:string" minOccurs="0" />
+              <xs:element name="CkWz" msprop:Generator_ColumnVarNameInTable="columnCkWz" msprop:Generator_ColumnPropNameInRow="CkWz" msprop:Generator_ColumnPropNameInTable="CkWzColumn" msprop:Generator_UserColumnName="CkWz" type="xs:string" minOccurs="0" />
+              <xs:element name="CkEwm" msprop:Generator_ColumnVarNameInTable="columnCkEwm" msprop:Generator_ColumnPropNameInRow="CkEwm" msprop:Generator_ColumnPropNameInTable="CkEwmColumn" msprop:Generator_UserColumnName="CkEwm" type="xs:base64Binary" minOccurs="0" />
+              <xs:element name="CKPai" msprop:Generator_ColumnVarNameInTable="columnCKPai" msprop:Generator_ColumnPropNameInRow="CKPai" msprop:Generator_ColumnPropNameInTable="CKPaiColumn" msprop:Generator_UserColumnName="CKPai" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,113 @@
+﻿@model db_models.cpmcb
+@{
+    ViewBag.Title = "Modal_cpmc";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3></h3>
+</div>
+
+<form action="/LevelCode/Insert_cpmc" method="post" name="appform" id="appform" onsubmit="return false;">
+    <div class="modal-body">
+        <div class="form-group" style="display:none">
+            <input type="text" class="form-control" name="zdbh" id="zdbh" value="@Model.zdbh" />
+        </div>
+
+        <div class="form-group">
+            <label>产品名称</label>
+            <input type="text" class="form-control" name="cpmc" id="cpmc" value="@Model.cpmc"/>
+        </div>
+
+        <div class="form-group">
+            <label>Product</label>
+            <input type="text" class="form-control" name="cpmc_eng" id="cpmc_eng" value="@Model.cpmc_eng" style="text-transform:uppercase;"/>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        if ($('#zdbh').val() == 0) {
+
+            $('h3').text("产品名称添加");
+        } else {
+
+            $('h3').text("产品名称编辑");
+        }
+
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                cpmc: {
+                    validators: {
+                        notEmpty: {
+                            message: '产品名称不能为空'
+                        }
+                    }
+                }
+                , cpmc_eng: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Product不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+        $("#btn_save").click(function () {
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+
+        var options = {
+            success: function (data) {
+                swal(data.Result == true ? "success" : "error");
+                if (data.Result == true) {
+                    ModalHide();
+                }
+            },
+            error: function (result) {
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+    });
+
+</script>

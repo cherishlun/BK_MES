@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="JianHuo_Report" targetNamespace="http://tempuri.org/JianHuo_Report.xsd" xmlns:mstns="http://tempuri.org/JianHuo_Report.xsd" xmlns="http://tempuri.org/JianHuo_Report.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="JianHuo_Report" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="JianHuo_Report" msprop:Generator_UserDSName="JianHuo_Report">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="JianHuo" msprop:Generator_TableClassName="JianHuoDataTable" msprop:Generator_TableVarName="tableJianHuo" msprop:Generator_RowChangedName="JianHuoRowChanged" msprop:Generator_TablePropName="JianHuo" msprop:Generator_RowDeletingName="JianHuoRowDeleting" msprop:Generator_RowChangingName="JianHuoRowChanging" msprop:Generator_RowEvHandlerName="JianHuoRowChangeEventHandler" msprop:Generator_RowDeletedName="JianHuoRowDeleted" msprop:Generator_RowClassName="JianHuoRow" msprop:Generator_UserTableName="JianHuo" msprop:Generator_RowEvArgName="JianHuoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Ph" msprop:Generator_ColumnVarNameInTable="columnPh" msprop:Generator_ColumnPropNameInRow="Ph" msprop:Generator_ColumnPropNameInTable="PhColumn" msprop:Generator_UserColumnName="Ph" type="xs:string" minOccurs="0" />
+              <xs:element name="kw" msprop:Generator_ColumnVarNameInTable="columnkw" msprop:Generator_ColumnPropNameInRow="kw" msprop:Generator_ColumnPropNameInTable="kwColumn" msprop:Generator_UserColumnName="kw" type="xs:string" minOccurs="0" />
+              <xs:element name="gh" msprop:Generator_ColumnVarNameInTable="columngh" msprop:Generator_ColumnPropNameInRow="gh" msprop:Generator_ColumnPropNameInTable="ghColumn" msprop:Generator_UserColumnName="gh" type="xs:string" minOccurs="0" />
+              <xs:element name="gg" msprop:Generator_ColumnVarNameInTable="columngg" msprop:Generator_ColumnPropNameInRow="gg" msprop:Generator_ColumnPropNameInTable="ggColumn" msprop:Generator_UserColumnName="gg" type="xs:string" minOccurs="0" />
+              <xs:element name="zb" msprop:Generator_ColumnVarNameInTable="columnzb" msprop:Generator_ColumnPropNameInRow="zb" msprop:Generator_ColumnPropNameInTable="zbColumn" msprop:Generator_UserColumnName="zb" type="xs:string" minOccurs="0" />
+              <xs:element name="m3" msprop:Generator_ColumnVarNameInTable="columnm3" msprop:Generator_ColumnPropNameInRow="m3" msprop:Generator_ColumnPropNameInTable="m3Column" msprop:Generator_UserColumnName="m3" type="xs:short" minOccurs="0" />
+              <xs:element name="khdm" msprop:Generator_ColumnVarNameInTable="columnkhdm" msprop:Generator_ColumnPropNameInRow="khdm" msprop:Generator_ColumnPropNameInTable="khdmColumn" msprop:Generator_UserColumnName="khdm" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

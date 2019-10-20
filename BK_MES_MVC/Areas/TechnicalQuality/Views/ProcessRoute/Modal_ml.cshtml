@@ -1,0 +1,278 @@
+﻿@model BK_MES_MVC.Areas.TechnicalQuality.Models.mx
+@{
+    ViewBag.Title = "Modal_ml";
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3></h3>
+</div>
+
+<form action="/ProcessRoute/Insert_ml" method="post" name="appform" id="appform" onsubmit="return false;">
+    <div class="modal-body" id="form_body">
+        <div class="form-group" style="display:none">
+            <input type="text" class="form-control" name="mlbh" id="mlbh" value="@Model.mlbh" />
+        </div>
+        <div class="form-group">
+            <label>拉拔设备</label>
+            @Html.DropDownListFor(m => m.lbsb, (List<SelectListItem>)ViewBag.machine, "请选择拉拔设备", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5" })
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>进线直径</label>
+                    <input type="text" class="form-control" name="jxzj" id="jxzj" value="@Model.jxzj" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" placeholder="请输入数字"/>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label>出线直径</label>
+                    <input type="text" class="form-control" name="cxzj" id="cxzj" value="@Model.cxzj" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" placeholder="请输入数字"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>模链输入</label>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            模序
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="select_down">
+                           
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" name="ml_cs" id="ml_cs" onkeyup="value=value.replace(/[^\-?\d.]/g,'')" placeholder="请输入数字"/>
+                 </div>
+                <div class="col-xs-2 col-xs-offset-2">
+                    <a class="glyphicon glyphicon-arrow-right" style="font-size:30px" id="add_ml"></a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>模链</label>
+            <input type="text" class="form-control" name="ml" id="ml" value="@Model.ml" readonly="readonly"/>
+        </div>
+    </div>
+</form>
+        <script>
+        </script>
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        if ($('#ml').val() == 0) {
+
+            $('h3').text("模链添加");
+        } else {
+
+            $('h3').text("模链编辑");
+            $('#lbsb').attr("disabled", true);
+        }
+
+
+        mlTomxdropdwon();
+
+
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                lbsb: {
+                    validators: {
+                        notEmpty: {
+                            message: '拉拔设备不能为空'
+                        }
+                    }
+                },
+                 jxzj: {
+                    validators: {
+                        notEmpty: {
+                            message: '进线直径不能为空'
+                        }
+                    }
+                },
+                cxzj: {
+                    validators: {
+                        notEmpty: {
+                            message: '出现直径不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+        $("#btn_save").click(function () {
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    //传值前移除下拉框的禁止属性 可以将值传到后台
+                    $('#lbsb').removeAttr("disabled");
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+
+        var options = {
+            success: function (data) {
+                swal(data.Result == true ? "success" : "error");
+                if (data.Result == true) {
+                    ModalHide();
+                }
+            },
+            error: function (result) {
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+        $('#lbsb').selectpicker({});
+
+    });
+
+
+    //通过生成的模链对应生成动态的模序下拉框
+    var Arr = [];
+
+    function mlTomxdropdwon() {
+
+        var ml_tot = $('#ml').val();
+        var _temp = "";
+        Arr = ml_tot.split("--");
+        Arr.splice($.inArray("", Arr), 1);
+        console.info(Arr);
+        //先清空下拉内容
+        $('#select_down').children().remove();
+
+        _temp = "";
+
+        for (let i = 1; i <= Arr.length; i++) {
+            
+            _temp += "<li><a onclick='btn_click(" + i + ")'>第" + i + "道</a></li>";
+        }
+        $('#select_down').append(_temp);
+    }
+
+
+    /******************/
+    //var Arr = [];
+    var bool = false;
+    var _id;
+
+    //添加模序事件
+    function t_event() {
+
+        let cs = "";
+        let temp = "";
+        let ml = "";
+
+        cs = $('#ml_cs').val();
+
+        //let len = $('#select_down').find("li").length;
+
+        if (bool) {
+
+            //修改
+            if (cs == "") {
+
+                //如果修改为空 则删除数组中该元素
+                Arr.splice($.inArray(Arr[_id], Arr), 1);
+                $('#ml').val(Arr.join('--') + "--");
+
+            } else {
+
+                Arr[_id] = cs;
+                $('#ml').val(Arr.join('--') + "--");
+
+            }
+            bool = false;
+
+        } else {
+            //添加
+            if (cs != "") {
+
+                Arr.push(cs);
+                ml = $('#ml').val();
+                ml += "" + cs + "--";
+                $('#ml').val(ml);
+            }
+        }
+
+        $('#ml_cs').val("");
+
+        //temp = "";
+        //$('#select_down').children().remove();
+        //for (let i = 1; i <= Arr.length; i++) {
+        //    console.info(i);
+        //    temp += "<li><a onclick='btn_click(" + i + ")'>第" + i + "道</a></li>";
+        //}
+        //console.info(temp);
+        ////let i = Number(len) + Number(1);
+        //$('#select_down').append(temp);
+
+    }
+
+    //箭头
+    $('#add_ml').click(function () {
+        t_event();
+        mlTomxdropdwon();
+    });
+
+    //文本回车键事件
+    $('#ml_cs').bind('keypress', function (event) {
+        if (event.keyCode == 13) {
+            t_event();
+            mlTomxdropdwon();
+        }
+    })
+
+    //下拉框
+    function btn_click(id) {
+
+        var ml_tot = $('#ml').val();
+        Arr = ml_tot.split("--");
+        Arr.splice($.inArray("", Arr), 1);
+        console.info(Arr);
+        _id = id - 1;
+        let le = Arr[id - 1];
+        console.info(le);
+        $('#ml_cs').val(le);
+
+        bool = true;
+    }
+
+    /***********/
+
+</script>

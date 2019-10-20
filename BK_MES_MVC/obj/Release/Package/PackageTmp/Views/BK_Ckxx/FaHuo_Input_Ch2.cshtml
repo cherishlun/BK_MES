@@ -1,0 +1,124 @@
+﻿@model db_models.dingdan_t
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="UTF-8"></script>
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+
+<script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+          //$(".form_date").datetimepicker("setStartDate", Date);
+
+        $(".selectpicker").selectpicker({
+
+        });
+
+        $(".input-block-level").attr('placeholder', '请输入');
+
+        $('#appform').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                ch: {
+                    message: '车号不能为空',
+                    validators: {
+                        notEmpty: {
+                            message: '车号不能为空'
+                        }
+                    }
+                }
+            }
+        });
+
+        var options = {
+            success: function (data) {
+                //debugger;
+                swal(data.info, data.mess, data.status == 1 ? "success" : "error");
+                if (data.status == 1)
+                    ModalHide();
+            },
+            error: function (result) {
+                //debugger;
+                //alert(result.responseText);
+                swal("数据保存失败！", result.responseText.substring(0, 100), "error");
+            }
+        };
+
+        $("#btn_save").click(function () {
+            //alert("a");
+            $("#appform").bootstrapValidator('validate');
+            var bootstrapValidator = $("#appform").data('bootstrapValidator');
+            bootstrapValidator.validate();
+            if (bootstrapValidator.isValid()) {
+                swal({
+                    title: "保存确认"
+                    , text: "是否保存数据？"
+                    , type: "info"
+                    , cancelButtonText: "取消"
+                    , confirmButtonText: "保存！"
+                    , showCancelButton: true
+                    , closeOnConfirm: false
+                    , showLoaderOnConfirm: true,
+                }, function () {
+                    $("#appform").ajaxSubmit(options);
+                });
+            }
+        });
+
+       // $('#khbm').selectpicker({});
+
+    });
+</script>
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>维护</h3>
+</div>
+
+
+<form action="/Bk_Ckxx/FaHuo_Save_Ch2" method="post" name="appform" id="appform">
+    <div class="modal-body">
+      
+        <div class="form-group">
+            <label>车号</label>
+            <input type="text" class="form-control" name="ch" value="@Model.ch" />
+        </div>
+        <div class="form-group">
+            <label>备注</label>
+            <input type="text" class="form-control" name="bz" value="@Model.bz" />
+        </div>
+        <div class="form-group">
+            <label>制单人</label>
+            <input type="text" class="form-control" name="zdr" value="@Model.zdr" />
+        </div>
+        <div class="form-group">
+            <label>提货人</label>
+            <input type="text" class="form-control" name="thr" value="@Model.thr" />
+        </div>
+
+        <input type="text" class="form-control" name="zdbh" value='@Model.zdbh' style="visibility: hidden" />
+        <input type="text" class="form-control" name="ddzt_zdbh" value='@ViewBag.form_ddzt_zdbh' style="visibility: hidden" />
+    </div>
+
+
+</form>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>

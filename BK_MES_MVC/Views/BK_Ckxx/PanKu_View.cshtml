@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "PanKu_View";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+    <script src="~/Scripts/Bk_Ckxx/PanKu_View.js" type="text/javascript"></script>
+
+}
+
+<!--表格-->
+<div class="panel-body" style="padding:0px;">
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive">
+                <div id="toolbar">
+                    <form class="form-inline">
+                        <div class="form-group" style="width:150px">
+                            @Html.DropDownList("pkrq", (List<SelectListItem>)ViewBag.form_pkrq, "请选择盘库日期", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5" })
+                        </div>
+                        <button type="button" class="btn btn-primary queryButton" id="btn_find">查询</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <table id="ArbetTable"></table>
+
+    <!--输入-->
+    <div id="myModal" class="modal fade" role="dialog" aria-labelledby="modal" style="overflow:scroll">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                请稍等，正在加载表单.....
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

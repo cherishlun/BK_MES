@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "PanKu";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <script type="text/javascript">
+        $(function () {
+
+                    //1.初始化Table
+                    var oTable = new TableInit();
+                    oTable.Init();
+
+            //查询
+            $('#btn_find').click(function () {
+                $("#ArbetTable").bootstrapTable('selectPage', 1);
+                    });
+
+            //盘库开始
+            $('#btn_begin').click(function () {
+                    swal({
+                    title: "开始盘库"
+                        , text: "是否开始盘库？"
+                        , type: "info"
+                        , cancelButtonText: "否"
+                        , confirmButtonText: "是！"
+                        , showCancelButton: true
+                        , closeOnConfirm: false
+                        , showLoaderOnConfirm: true,
+                }, function () {
+                    $.ajax({
+                        url: "/Bk_Ckxx/KuCun_PanKu_Begin"
+                        , success: function (data) {
+                                swal(data.info, "", data.status == 1 ? "success" : "error");
+                            }
+                        , error: function (result) {
+                                swal("处理失败！", result.responseText.substring(0, 100), "error");
+                            }
+                        });
+                    }
+                );
+                });
+            
+
+            //盘库结束
+            $('#btn_end').click(function () {
+                    swal({
+                    title: "结束盘库"
+                        , text: "是否结束盘库？"
+                        , type: "info"
+                        , cancelButtonText: "否"
+                        , confirmButtonText: "是！"
+                        , showCancelButton: true
+                        , closeOnConfirm: false
+                        , showLoaderOnConfirm: true,
+                }, function () {
+                    $.ajax({
+                        url: "/Bk_Ckxx/KuCun_PanKu_End"
+                        , success: function (data) {
+                            swal(data.info, "", data.status == 1 ? "success" : "error");
+                        }
+                        , error: function (result) {
+                            swal("处理失败！", result.responseText.substring(0, 100), "error");
+                        }
+                    });
+                }
+                );
+                });
+
+                setInterval(function () {
+                $('#ArbetTable').bootstrapTable('refresh');
+                }, 60000);
+            });
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#ArbetTable').bootstrapTable({
+                    height: tableHeight(),              //高度调整
+                    url: '/BK_Ckxx/KuCun_PanKu_Find',       //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                    searchOnEnterKey: true, //ENTER键搜索 ,
+                    contentType: "application/x-www-form-urlencoded",
+                    strictSearch: true,
+                    clickToSelect: true,                //是否启用点击选中行
+                    columns: [
+                        {
+                            field: 'index',
+                            title: '序号',
+                            align: "center",
+                            formatter: function (value, row, index) {
+                                var options = $('#ArbetTable').bootstrapTable('getOptions');
+                                return options.pageSize * (options.pageNumber - 1) + index + 1;
+                            },
+                            witdh: 10
+                        },
+                        {
+                            field: 'pkr',
+                            title: '盘库人',
+                            width: 100,
+                        },
+                        {
+                            field: 'pkzt',
+                            title: '盘点状态',
+                            witdh: 200,
+                            formatter: function (value, row, index) {
+                                if (value == "1")
+                                    return "盘库中.."
+                                if (value == "2")
+                                    return "盘库完成"
+
+                                return value;
+
+
+                            }
+                        }, 
+                        {
+                            field: 'pksl',
+                            title: '盘点数量',
+                            witdh: 200,
+                        }, {
+                            field: 'pksj',
+                            title: '最近操作时间',
+                            width: 200
+                        }
+                    ],
+                });
+            };
+            return oTableInit;
+        };
+
+
+        function tableHeight() {
+            return $(window).height() /2;
+        }
+
+    </script>
+
+}
+
+
+
+
+<!--表格-->
+    <div class="panel-body" style="padding:0px;">
+        
+        <button type="button" class="btn btn-primary queryButton" id="btn_begin" @ViewBag.formBegin>开始盘库</button>
+
+        <div class="container">
+            <div class="row">
+                <div class="table-responsive">
+                    <div id="toolbar">
+                        <form class="form-inline">
+                            <button type="button" class="btn btn-primary queryButton" id="btn_find" @ViewBag.formEnd>刷新盘库信息</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table id="ArbetTable"></table>
+    </div>
+
+    <button type="button" class="btn btn-primary queryButton" id="btn_end">结束盘库</button>

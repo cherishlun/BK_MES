@@ -1,0 +1,165 @@
+﻿
+@{
+    ViewBag.Title = "客户信息表";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/datagrid-filter.js?ver=20180328"></script>
+<script type="text/javascript" src="~/Scripts/MyJs.js"></script>
+
+@section scripts {
+    <script type="text/javascript">
+        var _local='@Html.ViewContext.RouteData.Values["controller"]';
+
+        $(function () {
+            var dg = $('#dg').datagrid({
+                url: '/'+_local+'/doQuery',
+                pagination: true,
+                rownumbers:true,
+                singleSelect: true,
+                remoteFilter: true,      //服务器查询
+                filterRules: [],
+                fit: true,
+                fitColumns:false,
+                singleSelect:true, //多选
+                checkOnSelect: false,
+                selectOnCheck: false,
+                emptyMsg: '<span>无记录</span>',
+                filterStringify: function (data) {
+                    console.log(data);
+                    return JSON.stringify(data);
+                },
+                onLoadSuccess: function (data) {
+
+                },
+                onClickRow:function(index,row){
+                    if(index>=0)
+                    {
+
+                    }
+                },
+                columns: [ @Html.Raw(@ViewBag.Grid) ]
+
+            });
+
+            $('#dg').datagrid({rowStyler: function(index,row){
+                @Html.Raw(@ViewBag.RowColor)
+            }
+            });
+
+
+            $('#dg').datagrid('enableFilter',
+                @Html.Raw(@ViewBag.Filter)
+            );
+
+        })
+
+        function getck()
+        {
+            var dbs = $("#dg").datagrid('getChecked');
+            if (dbs == undefined || dbs.length < 1) {
+                $.messager.alert('提示','请选择一行数据');
+                return null;
+            }
+            return dbs;
+        }
+
+        @Html.Raw(@ViewBag.MenuFunction)
+    </script>
+}
+
+<style type="text/css">
+    #form_update {
+        font-size: 12px;
+    }
+
+        #form_update label {
+            width: 120px;
+            height: 24px;
+            display: block;
+            float: left;
+            background: url(/Content/images/label.png) no-repeat left top;
+            line-height: 22px;
+            color: #999;
+            padding-left: 18px;
+        }
+
+        * html #form_update label {
+            float: none;
+            display: inline;
+            padding: 5px 15px 10px 18px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        #form_update input {
+            height: 20px;
+            width: 220px;
+            border: 1px solid #EEE;
+            padding: 4px 4px 0 4px;
+        }
+
+        #form_update p.input:hover label, #form_update p.input:active label, #form_update p.input:focus label {
+            background: url(/Content/images/label.png) no-repeat left -40px;
+            color: #000;
+        }
+
+        #form_update input#submit {
+            width: 82px;
+            height: 24px;
+            background: url(/Content/images/label.png) no-repeat left top;
+            margin-left: 73px;
+            color: #999;
+            border: 0 none;
+            line-height: 100%;
+            display: block;
+            padding: 0;
+            cursor: pointer;
+        }
+
+            #form_update input#submit:hover, #form_update input#submit:active, #form_update input#submit:focus {
+                background: url(/Content/images/label.png) no-repeat left bottom;
+                color: #000;
+            }
+
+    .icon-filter {
+        background: url('/Scripts/datagrid-filter.png') no-repeat center center;
+    }
+
+    .datagrid-view {
+        min-height: 98px;
+    }
+</style>
+
+
+
+<div id="g" data-options="region:'center',border:false" style="padding-top:4px;width:100%;height:800px">
+    <table id="dg" data-options="pagination:true,
+                singleSelect:true,
+                nowrap:false" toolbar="#tb"></table>
+    <style>
+        #g .datagrid-btable tr {
+            height: 80px;
+        }
+    </style>
+
+    <div id="tb" style="padding:5px;height:auto">
+        <div style="margin-bottom:5px">
+            @Html.Raw(@ViewBag.Menu)
+        </div>
+    </div>
+
+</div>
+
+
+
+<div id="input" class="easyui-dialog" title="记录维护" style="width:700px;height:500px;" data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <form id="form_update" method="post">
+        <div>
+            <label id="AID" style="display:none;"></label>
+            <div id="forminput" name="forminput">
+            </div>
+            @Html.Raw(@ViewBag.Save)
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="margin-left: 10px;" onclick="javascript:$('#input').window('close');">取消</a>
+        </div>
+    </form>
+</div>

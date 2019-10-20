@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h3>订单选择</h3>
+</div>
+
+
+<div class="modal-body">
+    <div id="toolbar-select">
+        <form class="form-inline" id="form-select">
+            <div class="form-group" style="width:200px;">
+                @Html.DropDownList("cpbm", (List<SelectListItem>)ViewBag.from_cpmc, "请选择客户名称", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "5", styles = "width:200px" })
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="st_gh" placeholder="开始日期" style="width:100px;">
+                <input type="text" class="form-control" id="st_gh" placeholder="结束日期" style="width:100px;">
+            </div>
+            <button type="button" class="btn btn-primary queryButton" id="btn_find">查询</button>
+        </form>
+    </div>
+    <table id="Arbet_DingDan_Table"></table>
+</div>
+
+<div class="modal-footer">
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btn_save">保存</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+    </div>
+</div>

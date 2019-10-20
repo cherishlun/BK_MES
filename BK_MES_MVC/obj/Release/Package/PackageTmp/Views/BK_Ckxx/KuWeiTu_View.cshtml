@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "KuWeiTu_View";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+    <!-- ECharts -->
+    <script src="~/Scripts/echarts-all.js"></script>
+
+    <script type="text/javascript">
+        var _KcWyl = @ViewBag._KcWyl;
+        var _KcZyl = @ViewBag._KcZyl;
+
+    </script>
+    
+    <script src="~/Scripts/Bk_Ckxx/KuWeiTu_echarts.js"></script>
+
+}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>饼状图</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="echarts" id="echarts-pie-chart"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>查询信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <form role="form" class="form-horizontal m-t">
+                        <div class="form-group draggable">
+                            <label class="col-sm-3 control-label">批 &nbsp;&nbsp; 号：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txt_ph" id="txt_ph" class="form-control" placeholder="查询批号">
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-3 control-label">钢丝名称：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txt_gsmc" id="txt_gsmc" class="form-control" placeholder="钢丝名称">
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-3 control-label">钢 &nbsp;&nbsp; 种：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txt_gz" id="txt_gz" class="form-control" placeholder="钢种">
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-3 control-label">规 &nbsp;&nbsp; 格：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txt_gg" id="txt_gg" class="form-control" placeholder="规格">
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-3 control-label">组 &nbsp;&nbsp; 别：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txt_zb" id="txt_zb" class="form-control" placeholder="组别">
+                            </div>
+                        </div>
+                        <div class="form-group draggable">
+                            <label class="col-sm-3 control-label">客户编码：</label>
+                            <div class="col-sm-8">
+                                <input type="text" name="txt_khbm" id="txt_khbm" class="form-control" placeholder="客户编码">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group draggable">
+                            <div class="col-sm-12 col-sm-offset-5">
+                                <button class="btn btn-primary" type="button" id="btn_find">查询</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>库位显示</h5>
+                    </div>
+                    <div class="ibox-content" style="height: 280px;">
+                        <table class="table table-bordered" id="table" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th colspan="2" style="text-align: center;">库位显示</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 50%;">成品库存</td>
+                                    <td>
+                                        <label>@ViewBag._KcZl 个</label>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>货架空位</td>
+                                    <td>
+                                        <label>@ViewBag._KcWyl 个</label>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>占用库位量</td>
+                                    <td>
+                                        <label>@ViewBag._KcZyl 个</label>
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="form-group draggable ">
+                            <div class="col-sm-12 " style="text-align: center;">
+                                <button class="btn btn-primary" type="submit" onclick=" parent.addMenuTab('/Bk_Ckxx/KuWeiTu_Details_View','仓库展示图')">查看详情</button>
+                                @*<button class="btn btn-primary" type="submit" onclick="~/Bk_Ckxx/KuWeiTu_Details_View">查看详情</button>*@
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,218 @@
+﻿@{
+    ViewBag.Title = "Ck_Mcgl";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+    <script type="text/javascript">
+        $(function () {
+
+            //1.初始化Table
+            var oTable = new TableInit();
+            oTable.Init();
+
+
+            $('#btn_add').click(function () {
+                $("#myModal").modal({
+                    remote: "/Bk_Ckxx/Ckmc_Data",
+                    backdrop: "static"
+                });
+
+            });
+
+            $("#myModal").on("hidden.bs.modal", function () {
+                $(this).removeData("bs.modal");
+                $(this).find(".modal-content").children().remove();
+            });
+
+          
+
+        });
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#ArbetTable').bootstrapTable({
+                    height: tableHeight(),              //高度调整
+                    url: '/BK_Ckxx/CkMc_GetData',         //请求后台的URL（*）
+                    method: 'get',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                    search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    searchOnEnterKey: true, //ENTER键搜索 ,
+                    contentType: "application/x-www-form-urlencoded",
+                    strictSearch: true,
+                    //showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    //minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    height: 600,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "zdbh",                     //每一行的唯一标识，一般为主键列
+                    //showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    //cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: [
+                        {
+                            field: 'ckmc',
+                            title: '仓库名称',
+                            width: 400
+                        }, {
+                            field: 'cklx',
+                            title: '仓库类型',
+                            witdh: 50
+                        }, {
+                            field: 'ckwz',
+                            title: '仓库位置',
+                            width: 200
+                        }, {
+                            field: 'ckzt',
+                            title: '仓库状态',
+                            width: 50,
+                        }, {
+                            field: 'ckbz',
+                            title: '仓库备注',
+                            width: 200
+                        }, {
+                            field: 'zdbh',
+                            title: '仓库编号',
+                            visible: false
+                        },
+                        {
+                            field: 'operate',
+                            title: '操作',
+                            formatter: operateFormatter //自定义方法，添加操作按钮\
+                            , width: 100
+                        },
+                    ],
+                    rowStyle: function (row, index) {
+                        var classesArr = ['success', 'info'];
+                        var strclass = "";
+                        if (row.ckzt == "可用") {
+                            strclass = classesArr[0];
+                        } else {
+                            strclass = classesArr[1];
+                        }
+                        return { classes: strclass };
+                    },
+                });
+
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,  //页码
+                    filter: params.filter,   //查询条件
+                    search: params.search
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+
+        function tableHeight() {
+            return $(window).height() - 50;
+        }
+
+        function operateFormatter(value, row, index) {//赋予的参数
+            var PySheDingID = row.zdbh; //;
+            // 利用 row 获取点击这行的ID
+            return [
+                "<div class='btn-group btn-group-xs'>" +
+                "<button type='button' class='btn btn-info' onclick='btnEdit(" + PySheDingID + ")' >修改</button>" +
+                "<button type='button' class='btn btn-warning' onclick='btnDele(" + PySheDingID + ")' >删除</button>" +
+                "</div>"
+            ].join('');
+        }
+
+        //关闭弹出窗口
+        function ModalHide() {
+            $("#myModal").modal('hide');
+            tablerefesh();
+        }
+
+        function btnEdit(key) {
+            $("#myModal").modal({
+                remote: "/Bk_Ckxx/Ckmc_Data?id=" + key,
+                backdrop: "static"
+            });
+        }
+
+
+
+        function btnDele(key) {
+            swal({
+                title: "删除确认"
+                , text: "是否删除这条数据？"
+                , type: "info"
+                , cancelButtonText: "取消"
+                , confirmButtonText: "删除！"
+                , showCancelButton: true
+                , closeOnConfirm: false
+                , showLoaderOnConfirm: true,
+            }, function () {
+                $.ajax({
+                    url: "/Bk_Ckxx/Ckmc_Data_Delete?id=" + key
+                    , success: function (data) {
+                        swal(data.info, "", data.status == 1 ? "success" : "error");
+                        if (data.status == 1) {
+                            tablerefesh();
+                        }
+                    }
+                    , error: function (result) {
+                        //alert(result.responseText);
+                        swal("数据删除失败！", result.responseText.substring(0, 100), "error");
+                    }
+                });
+            });
+        }
+
+        function tablerefesh() {
+            $('#ArbetTable').bootstrapTable('refresh', { 'url': "/BK_Ckxx/Ckmc_GetData" });
+        }
+
+    </script>
+}
+<!--表格-->
+<div class="panel-body" style="padding:0px;">
+    <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+    </div>
+
+    <table id="ArbetTable"></table>
+
+    <!--输入-->
+    <div id="myModal" class="modal fade" role="dialog" aria-labelledby="modal" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                请稍等，正在加载表单.....
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,573 @@
+﻿@model db_models._cpxxb
+@{
+    ViewBag.Title = "RoutePlan";
+    Layout = "~/Views/Shared/_Layout_2018.cshtml";
+}
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/table-alert")
+    @Styles.Render("~/Content/table-alert")
+
+    <!--验证-->
+    @Scripts.Render("~/bundles/bootstrapValidator")
+    @Styles.Render("~/Content/bootstrapValidator")
+
+    <script src="~/Scripts/jquery.form.js" type="text/javascript"></script>
+    <link href="~/Content/bootstrap-select.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-select.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap-select-zh_CN.js" type="text/javascript"></script>
+
+    <style>
+    .footer 
+    {
+        position: fixed;
+        left: 0px;
+        bottom: 0px;
+        width: 120%;
+        height: 50px;
+        background-color: #FFFFFF;
+        z-index: 9999;
+    }
+    </style>
+}
+
+    <body class="gray-bg">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="wrapper wrapper-content animated fadeInUp">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <div class="m-b-md">
+                                        @Html.DropDownListFor(m => m.cpdm, (List<SelectListItem>)ViewBag.custom, "成品代码", new { @class = "selectpicker form-control", data_style = "btn-white", data_live_search = "true", data_size = "6" })
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>状态：</dt>
+                                        <dd>
+                                            <span id="condition" class="label label-default">未知</span>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <dl class="dl-horizontal">
+                                        <dt>品种：</dt>
+                                        <dd id="pz">******</dd>
+                                        <dt>规格：</dt>
+                                        <dd id="gg">******</dd>
+                                        <dt>标准：</dt>
+                                        <dd id="bzhun">
+                                            <a href="project_detail.html#" class="text-navy">******</a>
+                                        </dd>
+                                        <dt>组别：</dt>
+                                        <dd id="zb">******</dd>
+                                        <dt>钢号：</dt>
+                                        <dd id="gh">******</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-sm-4" id="cluster_info">
+                                    <dl class="dl-horizontal">
+                                        <dt>标准单重：</dt>
+                                        <dd id="bzdz">******</dd>
+                                        <dt>标准强度：</dt>
+                                        <dd id="bzqd">******</dd>
+                                        <dt>标准公差：</dt>
+                                        <dd id="bzgc">******</dd>
+                                        <dt>标准包装：</dt>
+                                        <dd id="bzbz">******</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-sm-4" id="cluster_info">
+                                    <dl class="dl-horizontal">
+                                        <dt>单重要求：</dt>
+                                        <dd id="dzyq">******</dd>
+                                        <dt>强度要求：</dt>
+                                        <dd id="qdyq">******</dd>
+                                        <dt>公差要求：</dt>
+                                        <dd id="gcyq">******</dd>
+                                        <dt>包装要求：</dt>
+                                        <dd id="bzyq">******</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            @*<div class="row">
+                                <div class="col-sm-12">
+                                    <dl class="dl-horizontal">
+                                        <dt>当前进度</dt>
+                                        <dd>
+                                            <div class="progress progress-striped active">
+                                                <div id="progress" style="width: 10%;" class="progress-bar"></div>
+                                            </div>
+                                            <small>当前已完成项目总进度的 <strong>10%</strong></small>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>*@
+                            <div class="row m-t-sm">
+                                <div class="col-sm-12">
+                                    <div class="panel blank-panel">
+                                        <div class="panel-heading">
+                                            <div class="panel-options">
+                                                <ul class="nav nav-tabs">
+                                                    <li>
+                                                        <a href="project_detail.html#tab-1" data-toggle="tab">工艺路线制定</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="tab-1">
+                                                    <div class="row">
+                                                        <div class="col-sm-1">
+                                                            <div class="dropdown">
+                                                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                                    工艺选择
+                                                                    <span class="caret"></span>
+                                                                </button>
+                                                                <ul class="dropdown-menu" style="min-width:120px" aria-labelledby="dropdownMenu1">
+                                                                    <li><a id="add_sx">酸洗</a></li>
+                                                                    <li><a id="add_rcl">热处理</a></li>
+                                                                    <li><a id="add_kp">开坯</a></li>
+                                                                    <li><a id="add_lb">拉拔</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            @*<div id="contact-1" class="tab-pane active">
+                                                                <div class="client-detail">
+                                                                    <div id="vertical-timeline" class="vertical-container light-timeline">
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>*@
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>序号</th>
+                                                                        <th>工艺</th>
+                                                                        <th>工艺选择</th>
+                                                                        <th>工艺主要信息</th>
+                                                                        <th>操作</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody id="t_body"></tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--输入-->
+        <div id="myModal" class="modal fade" role="dialog" aria-labelledby="modal" style="overflow:scroll">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    请稍等，正在加载表单.....
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="row">
+                <div class="col-xs-1 col-xs-offset-9">
+                    <button class="btn btn-group-sm btn-primary pull-right" id="next" disabled="disabled">下一步</button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+<script>
+
+    ////全局变量 --酸洗--热处理--拉拔--顺序
+    //var sx, rcl, lb, temp;
+    //temp = 0;
+    //var Arr_sx = [];
+    //var Arr_rcl = [];
+    //var Arr_lb = [];
+    //var Arr_kp = [];
+    //var Arr = [];
+    var cpdm = "";
+
+    //产品代码选择
+    $('#cpdm').change(function () {
+
+        cpdm = $('#cpdm').find("option:selected").val();
+
+        if (cpdm == "") {
+            $('#next').attr("disabled", true);
+
+        } else {
+
+            $('#next').attr("disabled", false);
+            //查询产品信息
+            $.getJSON('/IrderReview/select_Prodcut', { cpdm: cpdm }, function (data) {
+                $.each(data, function (key, value) {
+                    switch (key) {
+                        case "cpgg":
+                            $('#gg').html(value);
+                            break;
+                        case "pz":
+                            $('#pz').html(value);
+                            break;
+                        case "ckbz":
+                            $('#bzhun').html(value);
+                            break;
+                        case "zb":
+                            $('#zb').html(value);
+                            break;
+                        case "gh":
+                            $('#gh').html(value);
+                            break;
+                        case "tsdz":
+                            $('#dzyq').html(value);
+                            break;
+                        case "tsgc":
+                            $('#gcyq').html(value);
+                            break;
+                        case "tsqd":
+                            $('#gcyq').html(value);
+                            break;
+                        case "tsqd":
+                            $('#qdyq').html(value);
+                            break;
+                        case "gc":
+                            $('#bzgc').html(value);
+                            break;
+                        case "pz":
+                            $('#bzdz').html(value);
+                            break;
+                        case "klqd":
+                            $('#bzqd').html(value);
+                            break;
+                        case "bzhuang":
+                            $('#bzbz').html(value);
+                            break;
+                        default:
+                            break;
+                    }
+                })
+
+            });
+
+            selectProcessRoute();
+        }
+    })
+
+
+    //查询产品工艺路线
+    function selectProcessRoute() {
+        //清空工艺路线等信息
+        $('#t_body').empty();
+
+        $.getJSON('/IrderReview/SelectProcessRoute', { cpdm: cpdm }, function (data) {
+            if (data.length > 0) {
+                $('#condition').text("已完成");
+                $('#condition').attr("class", "label label-success");
+                let s = "";
+                $.each(data, function (i, item) {
+                    i += 1;
+                    switch (item.gymc) {
+                        case "酸洗":
+                            s = "";
+                            s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + i + "步</span></td><td><p><h3><strong>酸洗</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(1,this)>编辑酸洗</a>";
+                            s += "</td><td><dl><dt style='float:left;'>酸洗程序号：</dt><dd>" + item.gysb + "</dd></dl></td>";
+                            s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+                            $('#t_body').append(s);
+                            $('#t_body').find('tr').eq(i - 1).find('dd').val(item.gyzdbh);
+                            break;
+                        case "热处理":
+                            s = "";
+                            s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + i + "步</span></td><td><p><h3><strong>热处理</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(2,this)>编辑热处理</a>";
+                            s += "</td><td><dl><dt style='float:left;'>加热炉：</dt><dd>" + item.gysb + "</dd></dl></td>";
+                            s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+                            $('#t_body').append(s);
+                            $('#t_body').find('tr').eq(i - 1).find('dd').val(item.gyzdbh);
+                            break;
+                        case "开坯":
+                            s = "";
+                            s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + i + "步</span></td><td><p><h3><strong>开坯</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(3,this)>编辑开坯</a>";
+                            s += "</td><td><dl><dt style='float:left;'>机器设备：</dt><dd>" + item.gysb + "</dd><dt style='float:left;'>模链：</dt><dd>" + item.ml + "</dd></dl></td>";
+                            s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+                            $('#t_body').append(s);
+                            $('#t_body').find('tr').eq(i - 1).find('dd').eq(0).val(item.machine_zdbh);
+                            $('#t_body').find('tr').eq(i - 1).find('dd').eq(1).val(item.gyzdbh);
+                            break;
+                        case "拉拔":
+                            s = "";
+                            s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + i + "步</span></td><td><p><h3><strong>拉拔</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(4,this)>编辑拉拔</a>";
+                            s += "</td><td><dl><dt style='float:left;'>机器设备：</dt><dd>" + item.gysb + "</dd><dt style='float:left;'>模链：</dt><dd>" + item.ml + "</dd></dl></td>";
+                            s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+                            $('#t_body').append(s);
+                            $('#t_body').find('tr').eq(i - 1).find('dd').eq(0).val(item.machine_zdbh);
+                            $('#t_body').find('tr').eq(i - 1).find('dd').eq(1).val(item.gyzdbh);
+                            break;
+                    }
+                });
+            } else {
+                $('#condition').text("未制定");
+                $('#condition').attr("class", "label label-warning");
+            }
+
+        })
+    }
+
+
+    //删除
+    function btnDele_t(obj) {
+
+        $(obj).parent().parent().remove();
+        //删除之后重新排序
+        var len = $('#t_body').find('tr').length;
+        for (var i = 0; i < len; i++) {
+            var j = i + 1;
+            $('#t_body').find('tr').eq(i).find('span').html("<i class='fa fa-check'></i>第" + j + "步"); 
+        }
+    }
+
+    //详情
+    function btnEdit_t() {
+
+
+    }
+
+    //下一步
+    $('#next').click(function () {
+
+        swal({
+            title: "提交确认"
+            , text: "是否提交？"
+            , type: "info"
+            , cancelButtonText: "取消"
+            , confirmButtonText: "提交！"
+            , showCancelButton: true
+            , closeOnConfirm: false
+            , showLoaderOnConfirm: false,
+        }, function () {
+            
+            var Arr_data = [];
+            var bool = true;
+            //var txt = "{";
+            //var i = $('.vertical-timeline-block h2').length;
+
+            //<-------------------------------------------------->
+            //$('.vertical-timeline-block h2').each(function () {
+            //    console.info($(this).text());
+            //    txt = "" + $(this).text + ":[{"
+
+            //})
+
+            $('#t_body').find("tr").each(function () {
+
+                //console.info($(this).find("span").text());
+                //console.info($(this).find("strong").text());
+                ////console.info($(this).find("dd").text());
+                //console.info($(this).find("dd").eq(0).val());
+                //console.info($(this).find("dd").eq(1).val());
+
+                var span = $(this).find("span").text();
+                var strong = $(this).find("strong").text();
+                var dd1 = $(this).find("dd").eq(0).val();
+                var dd2 = $(this).find("dd").eq(1).val();
+
+                if (dd1 == undefined || dd1 == "") {
+                    console.info("*dd1");
+                    bool = false;
+                    return false;
+                }
+                console.info(dd1);
+                var Json_data = {};
+                Json_data["a"] = dd1;
+                Json_data["b"] = dd2;
+                Json_data["Process"] = strong;
+                Json_data["Step"] = span;
+                Arr_data.push(Json_data);
+            });
+
+            if (bool == true) {
+
+                $.ajax({
+                    url: "/IrderReview/RouteSave?cpdm=" + cpdm + "",
+                    contentType: 'application/json;charset=utf-8',
+                    type: "post",
+                    async: false,
+                    data: JSON.stringify(Arr_data),
+                    success: function (data) {
+                        if (data.Result == true) {
+                            swal("提交成功");
+                            selectProcessRoute();
+                        } else {
+                            swal("提交失败");
+                        }
+                    }
+                });
+            } else {
+                swal("工艺路线制定不完整，请检查");
+            }
+        });
+        
+    });
+
+    //酸洗
+    $('#add_sx').click(function () {
+        $('#condition').text("制定中");
+        $('#condition').attr("class", "label label-primary");
+        let d = $('#t_body').find("tr").length;
+        d += 1;
+        let s = "";
+        s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + d + "步</span></td><td><p><h3><strong>酸洗</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(1,this)>编辑酸洗</a>";
+        s += "</td><td><dl><dt style='float:left;'>酸洗程序号：</dt><dd></dd></dl></td>";
+        s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t(" + d + ")></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+
+        $('#t_body').append(s);
+    })
+
+    //热处理
+    $('#add_rcl').click(function () {
+        $('#condition').text("制定中");
+        $('#condition').attr("class", "label label-primary");
+        let d = $('#t_body').find("tr").length;
+        d += 1;
+        let s = "";
+        s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + d + "步</span></td><td><p><h3><strong>热处理</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(2,this)>编辑热处理</a>";
+        s += "</td><td><dl><dt style='float:left;'>加热炉：</dt><dd></dd></dl></td>";
+        s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+
+        $('#t_body').append(s);
+    })
+
+    //开坯
+    $('#add_kp').click(function () {
+        $('#condition').text("制定中");
+        $('#condition').attr("class", "label label-primary");
+        let d = $('#t_body').find("tr").length;
+        d += 1;
+        let s = "";
+        s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + d + "步</span></td><td><p><h3><strong>开坯</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(3,this)>编辑开坯</a>";
+        s += "</td><td><dl><dt style='float:left;'>机器设备：</dt><dd></dd><dt style='float:left;'>模链：</dt><dd></dd></dl></td>";
+        s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+
+        $('#t_body').append(s);
+    })
+
+    //拉拔
+    $('#add_lb').click(function () {
+        $('#condition').text("制定中");
+        $('#condition').attr("class", "label label-primary");
+        let d = $('#t_body').find("tr").length;
+        d += 1;
+        let s = "";
+        s += "<tr><td><span class='label label-primary'><i class='fa fa-check'></i>第" + d + "步</span></td><td><p><h3><strong>拉拔</strong></h3></p></td><td><a class='btn btn-sm btn-primary' onclick=btn_click(4,this)>编辑拉拔</a>";
+        s += "</td><td><dl><dt style='float:left;'>机器设备：</dt><dd></dd><dt style='float:left;'>模链：</dt><dd></dd></dl></td>";
+        s += "<td><a class='glyphicon glyphicon-pencil' onclick=btnEdit_t()></a>&nbsp&nbsp&nbsp&nbsp<a class='glyphicon glyphicon-trash' onclick=btnDele_t(this)></a></td ></tr>";
+
+        $('#t_body').append(s);
+    })
+
+    ////酸洗
+    //$('#add_sx').click(function () {
+
+    //    let s = "";
+    //    s += "<div class='vertical-timeline-block'><div class='vertical-timeline-icon navy-bg'><i class='fa fa-briefcase'></i></div>";
+    //    s += "<div class='vertical-timeline-content'><h2>酸洗</h2><p id='sxh'></p><a class='btn btn-sm btn-primary' onclick=btn_click(1)>编辑酸洗</a></div></div>";
+
+    //    $('#vertical-timeline').append(s);
+    //})
+
+    ////热处理
+    //$('#add_rcl').click(function () {
+
+    //    let s = "";
+    //    s += "<div class='vertical-timeline-block'><div class='vertical-timeline-icon navy-bg'><i class='fa fa-briefcase'></i></div>";
+    //    s += "<div class='vertical-timeline-content'><h2>热处理</h2><p id='rcl'></p><a class='btn btn-sm btn-primary' onclick=btn_click(2)>编辑热处理</a></div></div>";
+
+    //    $('#vertical-timeline').append(s);
+    //})
+
+    ////开坯
+    //$('#add_kp').click(function () {
+
+    //    let s = "";
+    //    s += "<div class='vertical-timeline-block'><div class='vertical-timeline-icon navy-bg'><i class='fa fa-briefcase'></i></div>";
+    //    s += "<div class='vertical-timeline-content'><h2>开坯</h2><dl><dt>机器设备：</dt><dd id='machineName'></dd></dl><dl><dt>模链：</dt><dd id='ml'></dd></dl><a class='btn btn-sm btn-primary' onclick=btn_click(3)>编辑开坯</a></div></div>";
+
+    //    $('#vertical-timeline').append(s);
+    //})
+
+    ////拉拔
+    //$('#add_lb').click(function () {
+
+    //    let s = "";
+    //    s += "<div class='vertical-timeline-block'><div class='vertical-timeline-icon navy-bg'><i class='fa fa-briefcase'></i></div>";
+    //    s += "<div class='vertical-timeline-content'><h2>拉拔</h2><dl><dt>机器设备：</dt><dd id='sbmc'></dd></dl><dl><dt>模链：</dt><dd id='lb_ml'></dd></dl><a class='btn btn-sm btn-primary' onclick=btn_click(4)>编辑拉拔</a></div></div>";
+
+    //    $('#vertical-timeline').append(s);
+    //})
+
+    function btn_click(id, col) {
+
+        var column = col.parentNode.parentNode.rowIndex;
+    
+        switch (id) {
+            case 1:
+                $("#myModal").modal({
+                    remote: "/TechnicalQuality/IrderReview/Modal_Enact_sx?sxh=" + $('#sxh').text() + "&&col=" + column + "",
+                    backdrop: "static"
+                });
+                break;
+            case 2:
+                $("#myModal").modal({
+                    remote: "/TechnicalQuality/IrderReview/Modal_Enact_rcl?rcl=" + $('#rcl').text() + "&&col=" + column + "",
+                    backdrop: "static"
+                });
+                break;
+            case 3:
+                $("#myModal").modal({
+                    remote: "/TechnicalQuality/IrderReview/Modal_Enact_kp?machine=" + $('#machineName').attr('value') + "&&mlbh=" + $('#ml').attr('value') + "&&col=" + column + "",
+                    backdrop: "static"
+                });
+                break;
+            case 4:
+                $("#myModal").modal({
+                    remote: "/TechnicalQuality/IrderReview/Modal_Enact_lb?machine=" + $('#sbmc').attr('value') + "&&mlbh=" + $('#lb_ml').attr('value') + "&&col=" + column + "",
+                    backdrop: "static"
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    //关闭弹出窗口
+    function ModalHide() {
+        $("#myModal").modal('hide');
+    }
+
+    $("#myModal").on("hidden.bs.modal", function () {
+        $(this).removeData("bs.modal");
+        $(this).find(".modal-content").children().remove();
+    });
+
+
+</script>

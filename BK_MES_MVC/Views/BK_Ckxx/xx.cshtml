@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>xx</title>
+</head>
+<body>
+    <div>
+        @*<img src="@Url.Action("xx","ShowImgFromImgByte")" /><span id="__kindeditor_bookmark_start_14__"></span>
+        <img src="@Url.Action("xx","ShowImgFromImgByte")" /><span id="__kindeditor_bookmark_start_15__"></span>*@
+        <table>
+            @foreach (System.Data.DataRow _dr in ((System.Data.DataTable)ViewBag._Tt).Rows)
+            {
+            <tr>
+                <td>@_dr["CkMc"].ToString();</td>
+                <td><img src="~/Bk_Ckxx/X2?abc=@_dr["Ckwz"]" style="width:50px;height:50px;" /></td>
+            </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

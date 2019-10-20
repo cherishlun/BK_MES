@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RuKu_Hz" targetNamespace="http://tempuri.org/RuKu_Hz.xsd" xmlns:mstns="http://tempuri.org/RuKu_Hz.xsd" xmlns="http://tempuri.org/RuKu_Hz.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RuKu_Hz" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RuKu_Hz" msprop:Generator_UserDSName="RuKu_Hz">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RuKu_Hz" msprop:Generator_TableClassName="RuKu_HzDataTable" msprop:Generator_TableVarName="tableRuKu_Hz" msprop:Generator_TablePropName="_RuKu_Hz" msprop:Generator_RowDeletingName="RuKu_HzRowDeleting" msprop:Generator_RowChangingName="RuKu_HzRowChanging" msprop:Generator_RowEvHandlerName="RuKu_HzRowChangeEventHandler" msprop:Generator_RowDeletedName="RuKu_HzRowDeleted" msprop:Generator_UserTableName="RuKu_Hz" msprop:Generator_RowChangedName="RuKu_HzRowChanged" msprop:Generator_RowEvArgName="RuKu_HzRowChangeEvent" msprop:Generator_RowClassName="RuKu_HzRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Gh" msprop:Generator_ColumnVarNameInTable="columnGh" msprop:Generator_ColumnPropNameInRow="Gh" msprop:Generator_ColumnPropNameInTable="GhColumn" msprop:Generator_UserColumnName="Gh" type="xs:string" minOccurs="0" />
+              <xs:element name="Gg" msprop:Generator_ColumnVarNameInTable="columnGg" msprop:Generator_ColumnPropNameInRow="Gg" msprop:Generator_ColumnPropNameInTable="GgColumn" msprop:Generator_UserColumnName="Gg" type="xs:string" minOccurs="0" />
+              <xs:element name="Zb" msprop:Generator_ColumnVarNameInTable="columnZb" msprop:Generator_ColumnPropNameInRow="Zb" msprop:Generator_ColumnPropNameInTable="ZbColumn" msprop:Generator_UserColumnName="Zb" type="xs:string" minOccurs="0" />
+              <xs:element name="Khbm" msprop:Generator_ColumnVarNameInTable="columnKhbm" msprop:Generator_ColumnPropNameInRow="Khbm" msprop:Generator_ColumnPropNameInTable="KhbmColumn" msprop:Generator_UserColumnName="Khbm" type="xs:string" minOccurs="0" />
+              <xs:element name="Ssl" msprop:Generator_ColumnVarNameInTable="columnSsl" msprop:Generator_ColumnPropNameInRow="Ssl" msprop:Generator_ColumnPropNameInTable="SslColumn" msprop:Generator_UserColumnName="Ssl" type="xs:int" minOccurs="0" />
+              <xs:element name="Szl" msprop:Generator_ColumnVarNameInTable="columnSzl" msprop:Generator_ColumnPropNameInRow="Szl" msprop:Generator_ColumnPropNameInTable="SzlColumn" msprop:Generator_UserColumnName="Szl" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
